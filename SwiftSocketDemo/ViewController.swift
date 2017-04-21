@@ -56,7 +56,7 @@ class ViewController: UIViewController {
                         DispatchQueue.main.async {
                             self.client?.close()
                         }
-//                        break
+                        break
                     }
                 }
                 
