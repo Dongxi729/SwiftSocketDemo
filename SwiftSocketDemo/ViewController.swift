@@ -11,18 +11,18 @@ import SwiftSocket
 
 class ViewController: UIViewController {
     
-//    /// 网络IP地址
-//    let host = "192.168.3.4"
-//    
-//    /// 端口
-//    let port = 8411
+    /// 网络IP地址
+    let host = "192.168.3.4"
+    
+    /// 端口
+    let port = 8411
     
     /// 网络IP地址
-    let host = "192.168.1.10"
-
-    /// 端口
-    let port = 2048
-
+//        let host = "192.168.1.10"
+//    
+//        /// 端口
+//        let port = 2048
+    
     
     /// 连接方式
     var client: TCPClient?
@@ -53,45 +53,37 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-     
+        
         client = TCPClient(address: host, port: Int32(port))
         
         view.addSubview(connectBtn)
-
-        view.addSubview(msgSend)
     }
     
     /// 测试服务器
     func testServer() {
         let client = TCPClient(address: host, port: Int32(port))
         switch client.connect(timeout: 1) {
-        case .success:
-            switch client.send(string: "GET / HTTP/1.0\n\n" ) {
-            case .success:
-                guard let data = client.read(1024*10) else { return }
-                
-                self.sendMessage(msgtosend: "test123", clientServer: client)
-                
-                while true {
-                    if let msg = readmsg(clientSercer: client) {
-                        DispatchQueue.main.async {
-                            print("\((#file as NSString).lastPathComponent):(\(#line))\n",msg)
-                        }
-                    } else {
-                        DispatchQueue.main.async {
-                            self.client?.close()
-                        }
-                        break
-                    }
-                }
-                
-            case .failure(let error):
-                print("\((#file as NSString).lastPathComponent):(\(#line))\n",error.localizedDescription)
-            }
-        case .failure(let error):
             
-            print("\((#file as NSString).lastPathComponent):(\(#line))\n",error)
+        case .success:
+            self.sendMessage(msgtosend: "zdxzdxzdx", clientServer: client)
+            
+            while true {
+                if let msg = readmsg(clientSercer: client) {
+                    DispatchQueue.main.async {
+                        print("\((#file as NSString).lastPathComponent):(\(#line))\n",msg)
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.client?.close()
+                    }
+                    break
+                }
+            }
+            
+        case .failure(let error):
+            print("\((#file as NSString).lastPathComponent):(\(#line))\n",error.localizedDescription)
         }
+       
     }
     
     
@@ -109,6 +101,8 @@ class ViewController: UIViewController {
                     
                     let backToString = String(data: msgd, encoding: String.Encoding.utf8) as String!
                     
+                    
+                    
                     return backToString
                 }
             }
@@ -120,7 +114,7 @@ class ViewController: UIViewController {
 extension ViewController {
     
     /// 连接事件
-
+    
     func connectSEl(sender : UIButton) -> Void {
         
         DispatchQueue.global().async {
@@ -145,7 +139,7 @@ extension ViewController {
         data2.append(&int, length: 4)
         
         data2.append(ndata!)
-
+        
         
         guard let socket = clientServer else {
             return
