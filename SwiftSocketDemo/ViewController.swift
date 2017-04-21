@@ -18,26 +18,10 @@ class ViewController: UIViewController {
     let port = 8411
     
     /// 网络IP地址
-//        let host = "192.168.1.10"
+//            let host = "192.168.1.10"
 //    
-//        /// 端口
-//        let port = 2048
-    
-    
-    /// 连接方式
-    var client: TCPClient?
-    
-    
-    /// 连接按钮
-    lazy var connectBtn: UIButton = {
-        let d : UIButton = UIButton.init(frame: CGRect.init(x: 50, y: 50, width: 100, height: 100))
-        d.addTarget(self, action: #selector(connectSEl(sender:)), for: .touchUpInside)
-        d.backgroundColor = UIColor.gray
-        d.setTitle("启动链接", for: .normal)
-        
-        return d
-    }()
-    
+//            /// 端口
+//            let port = 2048
     
     /// 发送信息按钮
     lazy var msgSend: UIButton = {
@@ -50,22 +34,37 @@ class ViewController: UIViewController {
         return d
     }()
     
+    lazy var sendTfMsg: UITextField = {
+        let d : UITextField = UITextField.init(frame: CGRect.init(x: 0, y: 64, width: UIScreen.main.bounds.width, height: 30))
+        d.placeholder = "输入发送的文本信息"
+        return d
+    }()
+    
+    /// 连接方式
+    var client: TCPClient!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        view.addSubview(msgSend)
         
-        client = TCPClient(address: host, port: Int32(port))
+        view.addSubview(sendTfMsg)
         
-        view.addSubview(connectBtn)
+        DispatchQueue.global(qos: .default).async {
+            self.testServer()
+            
+            print("\((#file as NSString).lastPathComponent):(\(#line))\n")
+        }
     }
     
     /// 测试服务器
     func testServer() {
-        let client = TCPClient(address: host, port: Int32(port))
+        
+        client = TCPClient(address: host, port: Int32(port))
+        
         switch client.connect(timeout: 1) {
             
         case .success:
-            self.sendMessage(msgtosend: "zdxzdxzdx", clientServer: client)
             
             while true {
                 if let msg = readmsg(clientSercer: client) {
@@ -73,9 +72,9 @@ class ViewController: UIViewController {
                         print("\((#file as NSString).lastPathComponent):(\(#line))\n",msg)
                     }
                 } else {
-                    DispatchQueue.main.async {
-                        self.client?.close()
-                    }
+                    
+                    
+                    print("\((#file as NSString).lastPathComponent):(\(#line))\n")
                     break
                 }
             }
@@ -83,48 +82,14 @@ class ViewController: UIViewController {
         case .failure(let error):
             print("\((#file as NSString).lastPathComponent):(\(#line))\n",error.localizedDescription)
         }
-       
-    }
-    
-    
-    /// 读取信息
-    func readmsg(clientSercer : TCPClient)->String?{
-        //read 4 byte int as type
-        if let data = clientSercer.read(4) {
-            if data.count == 4 {
-                let ndata = NSData(bytes: data, length: data.count)
-                var len:Int32 = 0
-                ndata.getBytes(&len, length: data.count)
-                
-                if let buff = clientSercer.read(Int(len)){
-                    let msgd = Data(bytes: buff, count: buff.count)
-                    
-                    let backToString = String(data: msgd, encoding: String.Encoding.utf8) as String!
-                    
-                    
-                    
-                    return backToString
-                }
-            }
-        }
-        return nil
     }
 }
 
 extension ViewController {
     
-    /// 连接事件
-    
-    func connectSEl(sender : UIButton) -> Void {
-        
-        DispatchQueue.global().async {
-            self.testServer()
-        }
-    }
-    
     func sendMsg(sender : UIButton) -> Void {
         
-        self.sendMessage(msgtosend: (sender.titleLabel?.text)!, clientServer: client)
+        self.sendMessage(msgtosend:sendTfMsg.text!, clientServer: client)
     }
     
     //发送消息
@@ -140,7 +105,6 @@ extension ViewController {
         
         data2.append(ndata!)
         
-        
         guard let socket = clientServer else {
             return
         }
@@ -151,5 +115,28 @@ extension ViewController {
         case .failure(let error):
             print("\((#file as NSString).lastPathComponent):(\(#line))\n",error.localizedDescription)
         }
+    }
+    
+    /// 读取信息
+    func readmsg(clientSercer : TCPClient)->String?{
+        //read 4 byte int as type
+        if let data = clientSercer.read(4) {
+            if data.count == 4 {
+                let ndata = NSData(bytes: data, length: data.count)
+                var len:Int32 = 0
+                ndata.getBytes(&len, length: data.count)
+                
+                if let buff = clientSercer.read(Int(len)){
+                    let msgd = Data(bytes: buff, count: buff.count)
+                    
+                    let backToString = String(data: msgd, encoding: String.Encoding.utf8) as String!
+                    
+                    return backToString
+                }
+            }
+        } else {
+            print("\((#file as NSString).lastPathComponent):(\(#line))\n")
+        }
+        return nil
     }
 }
