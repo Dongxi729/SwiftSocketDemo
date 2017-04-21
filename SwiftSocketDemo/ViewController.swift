@@ -46,7 +46,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+     
+        client = TCPClient(address: host, port: Int32(port))
         
         view.addSubview(connectBtn)
         view.addSubview(msgSend)
@@ -78,7 +79,7 @@ class ViewController: UIViewController {
                 print("\((#file as NSString).lastPathComponent):(\(#line))\n",error.localizedDescription)
             }
         case .failure(let error):
-
+            
             print("\((#file as NSString).lastPathComponent):(\(#line))\n",error)
         }
     }
@@ -95,10 +96,6 @@ class ViewController: UIViewController {
                 
                 if let buff = clientSercer.read(Int(len)){
                     let msgd = Data(bytes: buff, count: buff.count)
-                    
-                    print("\((#file as NSString).lastPathComponent):(\(#line))\n",msgd.description)
-                    
-                    
                     
                     let backToString = String(data: msgd, encoding: String.Encoding.utf8) as String!
                     
@@ -123,6 +120,50 @@ extension ViewController {
     }
     
     func sendMsg(sender : UIButton) -> Void {
-        print("\((#file as NSString).lastPathComponent):(\(#line))\n")
+        
+        let client = TCPClient(address: host, port: Int32(port))
+        self.sendMessage(msgtosend: (sender.titleLabel?.text)!, clientServer: client)
+    }
+    
+    //发送消息
+    func sendMessage(msgtosend:String,clientServer : TCPClient) {
+        
+        let ndata = msgtosend.data(using: .utf8)
+        
+        var int : Int = (ndata?.count)!
+        
+        let data2 : NSMutableData = NSMutableData()
+        
+        data2.append(&int, length: 4)
+        
+        data2.append(ndata!)
+//
+//        var len:Int = Int(ndata!.count)
+//        
+//        /// 包头
+//        let data = Data(bytes: &len, count: 4)
+//        
+//        
+//        let sss = String.init(data: data, encoding: .utf8)
+//        
+//        var sendData = Data()
+//      
+//        sendData.append(data)
+//        sendData.append(ndata!)
+        
+        print("\((#file as NSString).lastPathComponent):(\(#line))\n",client)
+        
+        guard let socket = client else {
+            return
+        }
+        
+        switch socket.send(data: data2 as Data) {
+        case .success:
+            print("\((#file as NSString).lastPathComponent):(\(#line))\n","发送成功")
+        case .failure(let error):
+            print("\((#file as NSString).lastPathComponent):(\(#line))\n",error.localizedDescription)
+        }
+        
+        
     }
 }
