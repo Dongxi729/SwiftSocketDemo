@@ -21,6 +21,7 @@ class ViewController: UIViewController {
     var client: TCPClient?
     
     
+    /// 连接按钮
     lazy var connectBtn: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: 50, y: 50, width: 100, height: 100))
         d.addTarget(self, action: #selector(connectSEl(sender:)), for: .touchUpInside)
@@ -30,12 +31,25 @@ class ViewController: UIViewController {
         return d
     }()
     
+    
+    /// 发送信息按钮
+    lazy var msgSend: UIButton = {
+        let d : UIButton = UIButton.init(frame: CGRect.init(x: 50, y: 200, width: 100, height: 100))
+        
+        d.backgroundColor = UIColor.gray
+        d.addTarget(self, action: #selector(sendMsg(sender:)), for: .touchUpInside)
+        
+        d.setTitle("发送消息", for: .normal)
+        return d
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
         
         view.addSubview(connectBtn)
+        view.addSubview(msgSend)
     }
     
     /// 测试服务器
@@ -65,7 +79,6 @@ class ViewController: UIViewController {
             }
         case .failure(let error):
 
-            lkjdlksdlksajklsjkdj
             print("\((#file as NSString).lastPathComponent):(\(#line))\n",error)
         }
     }
@@ -98,10 +111,18 @@ class ViewController: UIViewController {
 }
 
 extension ViewController {
+    
+    /// 连接事件
+    ///
+    /// - Parameter sender: <#sender description#>
     func connectSEl(sender : UIButton) -> Void {
         
         DispatchQueue.global().async {
             self.testServer()
         }
+    }
+    
+    func sendMsg(sender : UIButton) -> Void {
+        print("\((#file as NSString).lastPathComponent):(\(#line))\n")
     }
 }
