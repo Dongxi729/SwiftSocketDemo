@@ -11,11 +11,18 @@ import SwiftSocket
 
 class ViewController: UIViewController {
     
+//    /// 网络IP地址
+//    let host = "192.168.3.4"
+//    
+//    /// 端口
+//    let port = 8411
+    
     /// 网络IP地址
     let host = "192.168.1.10"
-    
+
     /// 端口
     let port = 2048
+
     
     /// 连接方式
     var client: TCPClient?
@@ -50,6 +57,7 @@ class ViewController: UIViewController {
         client = TCPClient(address: host, port: Int32(port))
         
         view.addSubview(connectBtn)
+
         view.addSubview(msgSend)
     }
     
@@ -61,6 +69,8 @@ class ViewController: UIViewController {
             switch client.send(string: "GET / HTTP/1.0\n\n" ) {
             case .success:
                 guard let data = client.read(1024*10) else { return }
+                
+                self.sendMessage(msgtosend: "test123", clientServer: client)
                 
                 while true {
                     if let msg = readmsg(clientSercer: client) {
@@ -110,8 +120,7 @@ class ViewController: UIViewController {
 extension ViewController {
     
     /// 连接事件
-    ///
-    /// - Parameter sender: <#sender description#>
+
     func connectSEl(sender : UIButton) -> Void {
         
         DispatchQueue.global().async {
@@ -121,12 +130,11 @@ extension ViewController {
     
     func sendMsg(sender : UIButton) -> Void {
         
-        let client = TCPClient(address: host, port: Int32(port))
         self.sendMessage(msgtosend: (sender.titleLabel?.text)!, clientServer: client)
     }
     
     //发送消息
-    func sendMessage(msgtosend:String,clientServer : TCPClient) {
+    func sendMessage(msgtosend:String,clientServer : TCPClient?) {
         
         let ndata = msgtosend.data(using: .utf8)
         
@@ -137,23 +145,9 @@ extension ViewController {
         data2.append(&int, length: 4)
         
         data2.append(ndata!)
-//
-//        var len:Int = Int(ndata!.count)
-//        
-//        /// 包头
-//        let data = Data(bytes: &len, count: 4)
-//        
-//        
-//        let sss = String.init(data: data, encoding: .utf8)
-//        
-//        var sendData = Data()
-//      
-//        sendData.append(data)
-//        sendData.append(ndata!)
+
         
-        print("\((#file as NSString).lastPathComponent):(\(#line))\n",client)
-        
-        guard let socket = client else {
+        guard let socket = clientServer else {
             return
         }
         
@@ -163,7 +157,5 @@ extension ViewController {
         case .failure(let error):
             print("\((#file as NSString).lastPathComponent):(\(#line))\n",error.localizedDescription)
         }
-        
-        
     }
 }
