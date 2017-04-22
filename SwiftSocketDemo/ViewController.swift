@@ -38,9 +38,28 @@ class ViewController: UIViewController {
         return d
     }()
     
+    
     lazy var sendTfMsg: UITextField = {
         let d : UITextField = UITextField.init(frame: CGRect.init(x: 0, y: 64, width: UIScreen.main.bounds.width, height: 30))
         d.placeholder = "输入发送的文本信息"
+        return d
+    }()
+    
+    
+    /// 连接按钮
+    lazy var connetBtn: UIButton = {
+        let d : UIButton = UIButton.init(frame: CGRect.init(x: 0, y: 300, width: 100, height: 50))
+        d.backgroundColor = UIColor.brown
+        d.addTarget(self, action: #selector(connectSEL), for: .touchUpInside)
+        return d
+    }()
+    
+    
+    /// 断开连接
+    lazy var disConnectBtn: UIButton = {
+        let d : UIButton = UIButton.init(frame: CGRect.init(x: 0, y: 400, width: 100, height: 50))
+        d.backgroundColor = UIColor.black
+        d.addTarget(self, action: #selector(disconnectSEL), for: .touchUpInside)
         return d
     }()
     
@@ -54,6 +73,24 @@ class ViewController: UIViewController {
         
         view.addSubview(sendTfMsg)
         
+        view.addSubview(connetBtn)
+        
+        view.addSubview(disConnectBtn)
+        
+        DispatchQueue.global(qos: .default).async {
+            self.testServer()
+        }
+    }
+    
+    
+    /// 断开连接事件
+    func disconnectSEL() -> Void {
+        
+        client.close()
+    }
+    
+    /// 连接是服务器
+    func connectSEL() -> Void {
         DispatchQueue.global(qos: .default).async {
             self.testServer()
         }
@@ -74,13 +111,18 @@ class ViewController: UIViewController {
                         print("\((#file as NSString).lastPathComponent):(\(#line))\n",msg)
                     }
                 } else {
-                    print("\((#file as NSString).lastPathComponent):(\(#line))\n")
+                    print("\((#file as NSString).lastPathComponent):(\(#line))\n","连接失败")
+                    /// 连接异常则关闭连接。
+                    client.close()
+                    
+                    client = nil
                     break
                 }
             }
             
         case .failure(let error):
-            print("\((#file as NSString).lastPathComponent):(\(#line))\n",error.localizedDescription)
+            
+            print("\((#file as NSString).lastPathComponent):(\(#line))\n","服务器状态不好或连接不上")
         }
     }
 }
@@ -113,7 +155,8 @@ extension ViewController {
         case .success:
             print("\((#file as NSString).lastPathComponent):(\(#line))\n","发送成功")
         case .failure(let error):
-            print("\((#file as NSString).lastPathComponent):(\(#line))\n",error.localizedDescription)
+            
+            print("\((#file as NSString).lastPathComponent):(\(#line))\n","断开连接")
         }
     }
     
