@@ -115,7 +115,6 @@ class ViewController: UIViewController {
                     /// 连接异常则关闭连接。
                     client.close()
                     
-                    client = nil
                     break
                 }
             }
