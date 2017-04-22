@@ -38,6 +38,11 @@ class ViewController: UIViewController {
         return d
     }()
     
+    lazy var showGetMsgView: UITextView = {
+        let d : UITextView = UITextView.init(frame: CGRect.init(x: 200, y: 0, width: UIScreen.main.bounds.width - 200, height: UIScreen.main.bounds.height))
+        d.isUserInteractionEnabled = false
+        return d
+    }()
     
     lazy var sendTfMsg: UITextField = {
         let d : UITextField = UITextField.init(frame: CGRect.init(x: 0, y: 64, width: UIScreen.main.bounds.width, height: 30))
@@ -79,6 +84,8 @@ class ViewController: UIViewController {
         
         view.addSubview(disConnectBtn)
         
+        view.addSubview(showGetMsgView)
+        
         DispatchQueue.global(qos: .default).async {
             self.testServer()
         }
@@ -111,6 +118,13 @@ class ViewController: UIViewController {
                 if let msg = readmsg(clientSercer: client) {
                     DispatchQueue.main.async {
                         print("\((#file as NSString).lastPathComponent):(\(#line))\n",msg)
+                        
+                        if self.showGetMsgView.text.characters.count > 0 {
+                            self.showGetMsgView.text.append("\n" + msg)
+                        }
+                        
+                        self.showGetMsgView.text = msg
+                        
                     }
                 } else {
                     print("\((#file as NSString).lastPathComponent):(\(#line))\n","连接失败")
