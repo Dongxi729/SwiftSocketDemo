@@ -49,8 +49,9 @@ class ViewController: UIViewController {
     /// 连接按钮
     lazy var connetBtn: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: 0, y: 300, width: 100, height: 50))
-        d.backgroundColor = UIColor.brown
+        d.setTitle("重连/连接", for: .normal)
         d.addTarget(self, action: #selector(connectSEL), for: .touchUpInside)
+        d.backgroundColor = .gray
         return d
     }()
     
@@ -58,7 +59,8 @@ class ViewController: UIViewController {
     /// 断开连接
     lazy var disConnectBtn: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: 0, y: 400, width: 100, height: 50))
-        d.backgroundColor = UIColor.black
+        d.backgroundColor = UIColor.gray
+        d.setTitle("断开连接", for: .normal)
         d.addTarget(self, action: #selector(disconnectSEL), for: .touchUpInside)
         return d
     }()
