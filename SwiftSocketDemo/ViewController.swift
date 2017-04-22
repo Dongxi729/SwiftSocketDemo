@@ -12,16 +12,20 @@ import SwiftSocket
 class ViewController: UIViewController {
     
     /// 网络IP地址
-    let host = "192.168.3.4"
+    //    let host = "192.168.3.4"
+    //
+    //    /// 端口
+    //    let port = 8411
     
-    /// 端口
-    let port = 8411
+    let host = "172.30.33.32"
+    let port = 8888
+    
     
     /// 网络IP地址
-//            let host = "192.168.1.10"
-//    
-//            /// 端口
-//            let port = 2048
+    //            let host = "192.168.1.10"
+    //
+    //            /// 端口
+    //            let port = 2048
     
     /// 发送信息按钮
     lazy var msgSend: UIButton = {
@@ -52,8 +56,6 @@ class ViewController: UIViewController {
         
         DispatchQueue.global(qos: .default).async {
             self.testServer()
-            
-            print("\((#file as NSString).lastPathComponent):(\(#line))\n")
         }
     }
     
@@ -72,8 +74,6 @@ class ViewController: UIViewController {
                         print("\((#file as NSString).lastPathComponent):(\(#line))\n",msg)
                     }
                 } else {
-                    
-                    
                     print("\((#file as NSString).lastPathComponent):(\(#line))\n")
                     break
                 }
@@ -137,6 +137,8 @@ extension ViewController {
         } else {
             print("\((#file as NSString).lastPathComponent):(\(#line))\n")
         }
+        
+        
         return nil
     }
 }
