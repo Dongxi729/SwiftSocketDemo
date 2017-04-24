@@ -15,6 +15,7 @@
 		26800E871EA8B9920048D8A7 /* SwiftSocketDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26800E861EA8B9920048D8A7 /* SwiftSocketDemoTests.swift */; };
 		26800E991EA8BC960048D8A7 /* SwiftSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26800E981EA8BC960048D8A7 /* SwiftSocket.framework */; };
 		26800E9A1EA8BC960048D8A7 /* SwiftSocket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26800E981EA8BC960048D8A7 /* SwiftSocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		26E9A9EA1EAB670B00B28EA5 /* ooo.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E9A9E91EAB670B00B28EA5 /* ooo.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		26800E861EA8B9920048D8A7 /* SwiftSocketDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftSocketDemoTests.swift; sourceTree = "<group>"; };
 		26800E881EA8B9920048D8A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		26800E981EA8BC960048D8A7 /* SwiftSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftSocket.framework; sourceTree = "<group>"; };
+		26E9A9E91EAB670B00B28EA5 /* ooo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ooo.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 				26800E751EA8B9920048D8A7 /* Main.storyboard */,
 				26800E781EA8B9920048D8A7 /* Assets.xcassets */,
 				26800E7A1EA8B9920048D8A7 /* LaunchScreen.storyboard */,
+				26E9A9E91EAB670B00B28EA5 /* ooo.png */,
 				26800E7D1EA8B9920048D8A7 /* Info.plist */,
 			);
 			path = SwiftSocketDemo;
@@ -204,6 +207,7 @@
 				26800E7C1EA8B9920048D8A7 /* LaunchScreen.storyboard in Resources */,
 				26800E791EA8B9920048D8A7 /* Assets.xcassets in Resources */,
 				26800E771EA8B9920048D8A7 /* Main.storyboard in Resources */,
+				26E9A9EA1EAB670B00B28EA5 /* ooo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

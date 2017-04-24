@@ -10,22 +10,22 @@ import UIKit
 import SwiftSocket
 
 class ViewController: UIViewController {
+
+    // 网络IP地址
+    let host = "192.168.3.4"
+    
+    /// 端口
+    let port = 8411
+    
+    //    let host = "172.30.33.60"
+    //    let port = 8888
+    //
     
     /// 网络IP地址
-    //    let host = "192.168.3.4"
+    //    let host = "192.168.1.10"
     //
     //    /// 端口
-    //    let port = 8411
-    
-    let host = "172.30.33.32"
-    let port = 8888
-    
-    
-    /// 网络IP地址
-    //            let host = "192.168.1.10"
-    //
-    //            /// 端口
-    //            let port = 2048
+    //    let port = 2048
     
     /// 发送信息按钮
     lazy var msgSend: UIButton = {
@@ -86,6 +86,8 @@ class ViewController: UIViewController {
         
         view.addSubview(showGetMsgView)
         
+//        view.addSubview(chatTb)
+        
         DispatchQueue.global(qos: .default).async {
             self.testServer()
         }
@@ -118,13 +120,11 @@ class ViewController: UIViewController {
                 if let msg = readmsg(clientSercer: client) {
                     DispatchQueue.main.async {
                         print("\((#file as NSString).lastPathComponent):(\(#line))\n",msg)
-                        
-                        if self.showGetMsgView.text.characters.count > 0 {
-                            self.showGetMsgView.text.append("\n" + msg)
+
+                        if !msg.contains("用户") {
+                            
+                            self.showGetMsgView.text = msg
                         }
-                        
-                        self.showGetMsgView.text = msg
-                        
                     }
                 } else {
                     print("\((#file as NSString).lastPathComponent):(\(#line))\n","连接失败")
@@ -135,7 +135,7 @@ class ViewController: UIViewController {
                 }
             }
             
-        case .failure(let error):
+        case .failure(let _):
             
             print("\((#file as NSString).lastPathComponent):(\(#line))\n","服务器状态不好或连接不上")
         }
@@ -152,6 +152,8 @@ extension ViewController {
     //发送消息
     func sendMessage(msgtosend:String,clientServer : TCPClient?) {
         
+        
+        /// 
         let ndata = msgtosend.data(using: .utf8)
         
         var int : Int = (ndata?.count)!
