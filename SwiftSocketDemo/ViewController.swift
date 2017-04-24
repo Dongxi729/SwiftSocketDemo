@@ -10,24 +10,32 @@ import UIKit
 import SwiftSocket
 
 class ViewController: UIViewController {
-
-    // 网络IP地址
-    let host = "192.168.3.4"
     
-    /// 端口
-    let port = 8411
+    // 网络IP地址
+    //    let host = "192.168.3.4"
+    //
+    //    /// 端口
+    //    let port = 8411
     
     //    let host = "172.30.33.60"
     //    let port = 8888
     //
     
     /// 网络IP地址
-    //    let host = "192.168.1.10"
-    //
-    //    /// 端口
-    //    let port = 2048
+    let host = "192.168.2.13"
+    
+    /// 端口
+    let port = 8411
     
     /// 发送信息按钮
+    
+    
+    /// 包体长度
+    var leng:Int = 0
+    
+    
+    var allbyt:[Byte] = [Byte]()
+    
     lazy var msgSend: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: 50, y: 200, width: 100, height: 100))
         
@@ -86,7 +94,7 @@ class ViewController: UIViewController {
         
         view.addSubview(showGetMsgView)
         
-//        view.addSubview(chatTb)
+        //        view.addSubview(chatTb)
         
         DispatchQueue.global(qos: .default).async {
             self.testServer()
@@ -120,7 +128,7 @@ class ViewController: UIViewController {
                 if let msg = readmsg(clientSercer: client) {
                     DispatchQueue.main.async {
                         print("\((#file as NSString).lastPathComponent):(\(#line))\n",msg)
-
+                        
                         if !msg.contains("用户") {
                             
                             self.showGetMsgView.text = msg
@@ -153,25 +161,31 @@ extension ViewController {
     func sendMessage(msgtosend:String,clientServer : TCPClient?) {
         
         
-        /// 
-        let ndata = msgtosend.data(using: .utf8)
+        ///
+        // let imgdata = msgtosend.data(using: .utf8)
         
-        var int : Int = (ndata?.count)!
+        
+        let img = UIImage.init(named: "ooo")
+        let imgdata = UIImagePNGRepresentation(img!)
+        
+        
+        
+        var int : Int = (imgdata?.count)!
         
         let data2 : NSMutableData = NSMutableData()
         
         data2.append(&int, length: 4)
         
-        data2.append(ndata!)
+        data2.append(imgdata!)
         
         guard let socket = clientServer else {
             return
         }
-        
+        print("aaaa",data2.length)
         switch socket.send(data: data2 as Data) {
         case .success:
             print("\((#file as NSString).lastPathComponent):(\(#line))\n","发送成功")
-        case .failure(let error):
+        case .failure(let _):
             
             print("\((#file as NSString).lastPathComponent):(\(#line))\n","断开连接")
         }
@@ -180,16 +194,29 @@ extension ViewController {
     /// 读取信息
     func readmsg(clientSercer : TCPClient)->String?{
         //read 4 byte int as type
+        
+        ///
         if let data = clientSercer.read(4) {
             if data.count == 4 {
+                print(data)
                 let ndata = NSData(bytes: data, length: data.count)
+                
                 var len:Int32 = 0
+                
                 ndata.getBytes(&len, length: data.count)
+                print("bbbb",len)
+                
+                
+                allbyt = [Byte]()
+                leng = Int(len)
+                
                 
                 if let buff = clientSercer.read(Int(len)){
-                    let msgd = Data(bytes: buff, count: buff.count)
                     
-                    let backToString = String(data: msgd, encoding: String.Encoding.utf8) as String!
+                    print("eeeeeeee",buff.count)
+                    bytfun(_bytes: buff)
+                    
+                    let backToString = "  sdfsdf"// String(data: msgd, encoding: String.Encoding.utf8) as String!
                     
                     return backToString
                 }
@@ -200,5 +227,29 @@ extension ViewController {
         
         
         return nil
+    }
+    
+    func bytfun(_bytes:[Byte])
+    {
+        allbyt.append(contentsOf: _bytes)
+        
+        if(allbyt.count >= leng){
+            let msgd = Data(bytes: allbyt, count: leng)
+            addimg(data: msgd)
+        }
+    }
+    
+    
+    func addimg(data:Data)
+    {
+        if(data.count>50)
+        {
+            DispatchQueue.main.async {
+                let img = UIImageView(image: UIImage(data: data)!)
+                self.view.addSubview(img)
+            }
+            
+        }
+        
     }
 }
