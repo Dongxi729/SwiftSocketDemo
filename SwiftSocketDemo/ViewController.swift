@@ -8,11 +8,13 @@
 
 import UIKit
 import SwiftSocket
+import AVFoundation
 
 class ViewController: UIViewController {
     
-    // 网络IP地址
-    let host = "192.168.3.4"
+    // 网络IP地址 --- 172.168.1.105
+//    let host = "192.168.3.4"
+    let host = "172.168.1.105"
     
     /// 端口
     let port = 8411
@@ -56,8 +58,9 @@ class ViewController: UIViewController {
     }()
     
     lazy var showGetMsgView: UITextView = {
-        let d : UITextView = UITextView.init(frame: CGRect.init(x: 200, y: 0, width: UIScreen.main.bounds.width - 200, height: UIScreen.main.bounds.height))
+        let d : UITextView = UITextView.init(frame: CGRect.init(x: 200, y: 0, width: UIScreen.main.bounds.width - 200, height: UIScreen.main.bounds.height * 0.5))
         d.isUserInteractionEnabled = false
+        d.backgroundColor = UIColor.gray
         return d
     }()
     
@@ -67,6 +70,17 @@ class ViewController: UIViewController {
         return d
     }()
     
+    var cellIcon : [String] = ["开始录音","停止","转换amr"]
+    
+    
+    lazy var getMsg: UITableView = {
+        let d : UITableView = UITableView.init(frame: CGRect.init(x: 200, y: UIScreen.main.bounds.height * 0.5, width: UIScreen.main.bounds.width - 200, height: UIScreen.main.bounds.height * 0.5))
+//        let d : UITableView = UITableView.init(frame:self.view.bounds)
+        d.register(UITableViewCell.self, forCellReuseIdentifier: "cellID")
+        d.delegate = self;
+        d.dataSource = self;
+        return d
+    }()
     
     /// 连接按钮
     lazy var connetBtn: UIButton = {
@@ -103,7 +117,9 @@ class ViewController: UIViewController {
         
         view.addSubview(showGetMsgView)
         
-        //        view.addSubview(chatTb)
+        view.addSubview(getMsg)
+        
+        AvdioTool.shared.creatSession()
         
         DispatchQueue.global(qos: .default).async {
             self.testServer()
@@ -177,15 +193,17 @@ extension ViewController {
         let img = UIImage.init(named: "wqwe")
         let imgdata = UIImagePNGRepresentation(img!)
         
+        ///f发送语音
         
+        print("\((#file as NSString).lastPathComponent):(\(#line))\n",AvdioTool.shared.voiceData)
         
-        var int : Int = (imgdata?.count)!
+        var int : Int = (AvdioTool.shared.voiceData?.count)!
         
         let data2 : NSMutableData = NSMutableData()
         
         data2.append(&int, length: 4)
         
-        data2.append(imgdata!)
+        data2.append(AvdioTool.shared.voiceData!)
         
         guard let socket = clientServer else {
             return
@@ -272,15 +290,70 @@ extension ViewController {
     
     func addimg(data:Data)
     {
+        
+        
         if(data.count>50)
         {
-            DispatchQueue.main.async {
-                let img = UIImageView(image: UIImage(data: data)!)
-//                img.contentMode = .scaleAspectFit
-                self.view.addSubview(img)
-            }
+//            DispatchQueue.main.async {
+//                let img = UIImageView(image: UIImage(data: data)!)
+////                img.contentMode = .scaleAspectFit
+//                self.view.addSubview(img)
+//            }
             
+            DispatchQueue.main.async {
+//                let img = UIImageView(image: UIImage(data: data)!)
+////                img.contentMode = .scaleAspectFit
+//                self.view.addSubview(img)
+                
+                do {
+                    let play = try AVAudioPlayer(data: data, fileTypeHint: ".wav")
+                    play.play()
+                    
+                    
+                    
+                    
+                    print("\((#file as NSString).lastPathComponent):(\(#line))\n")
+
+                } catch {
+                    print("\((#file as NSString).lastPathComponent):(\(#line))\n",error.localizedDescription)
+                }
+            }
         }
+    }
+}
+
+extension ViewController : UITableViewDataSource,UITableViewDelegate {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellID")
+        cell?.textLabel?.text = cellIcon[indexPath.row]
+        return cell!
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        print("\((#file as NSString).lastPathComponent):(\(#line))\n",indexPath.row)
+        switch indexPath.row {
+
+            /// 开始录音
+        case 0:
+            AvdioTool.shared.startRecord()
+            
+            break
+            /// 停止录音
+        case 1:
+            AvdioTool.shared.stopRecord()
+            
+            break
+            /// 转回
+        case 2:
+            AvdioTool.shared.convertWavToAmr()
+            
+            break
+        default:
+            break
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return cellIcon.count
     }
 }

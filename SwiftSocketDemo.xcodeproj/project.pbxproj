@@ -12,6 +12,7 @@
 		26150CB21EAEE75E00F2B5BF /* DispatchQueue-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26150CB11EAEE75E00F2B5BF /* DispatchQueue-Extension.swift */; };
 		26150CB41EAF213600F2B5BF /* wqwe.png in Resources */ = {isa = PBXBuildFile; fileRef = 26150CB31EAF213600F2B5BF /* wqwe.png */; };
 		26150CB61EAF221900F2B5BF /* zdx.png in Resources */ = {isa = PBXBuildFile; fileRef = 26150CB51EAF221900F2B5BF /* zdx.png */; };
+		26150CB81EAF24EC00F2B5BF /* test.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 26150CB71EAF24EC00F2B5BF /* test.mp3 */; };
 		26800E721EA8B9920048D8A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26800E711EA8B9920048D8A7 /* AppDelegate.swift */; };
 		26800E741EA8B9920048D8A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26800E731EA8B9920048D8A7 /* ViewController.swift */; };
 		26800E771EA8B9920048D8A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26800E751EA8B9920048D8A7 /* Main.storyboard */; };
@@ -20,6 +21,12 @@
 		26800E871EA8B9920048D8A7 /* SwiftSocketDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26800E861EA8B9920048D8A7 /* SwiftSocketDemoTests.swift */; };
 		26800E991EA8BC960048D8A7 /* SwiftSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26800E981EA8BC960048D8A7 /* SwiftSocket.framework */; };
 		26800E9A1EA8BC960048D8A7 /* SwiftSocket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26800E981EA8BC960048D8A7 /* SwiftSocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		26F41C061EB0B70F00F4A929 /* amrFileCodec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26F41BFA1EB0B70F00F4A929 /* amrFileCodec.mm */; };
+		26F41C071EB0B70F00F4A929 /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F41BFC1EB0B70F00F4A929 /* libopencore-amrnb.a */; };
+		26F41C081EB0B70F00F4A929 /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F41BFD1EB0B70F00F4A929 /* libopencore-amrwb.a */; };
+		26F41C091EB0B70F00F4A929 /* VoiceConverter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26F41C051EB0B70F00F4A929 /* VoiceConverter.mm */; };
+		26F41C0C1EB0B73000F4A929 /* WavConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F41C0B1EB0B73000F4A929 /* WavConvert.m */; };
+		26F41C0E1EB0B76400F4A929 /* AvdioTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F41C0D1EB0B76400F4A929 /* AvdioTool.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +59,7 @@
 		26150CB11EAEE75E00F2B5BF /* DispatchQueue-Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DispatchQueue-Extension.swift"; sourceTree = "<group>"; };
 		26150CB31EAF213600F2B5BF /* wqwe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wqwe.png; sourceTree = "<group>"; };
 		26150CB51EAF221900F2B5BF /* zdx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zdx.png; sourceTree = "<group>"; };
+		26150CB71EAF24EC00F2B5BF /* test.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = test.mp3; sourceTree = "<group>"; };
 		26800E6E1EA8B9920048D8A7 /* SwiftSocketDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftSocketDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26800E711EA8B9920048D8A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		26800E731EA8B9920048D8A7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +71,20 @@
 		26800E861EA8B9920048D8A7 /* SwiftSocketDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftSocketDemoTests.swift; sourceTree = "<group>"; };
 		26800E881EA8B9920048D8A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		26800E981EA8BC960048D8A7 /* SwiftSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftSocket.framework; sourceTree = "<group>"; };
+		26F41BF71EB0B70E00F4A929 /* SwiftSocketDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftSocketDemo-Bridging-Header.h"; sourceTree = "<group>"; };
+		26F41BF91EB0B70F00F4A929 /* amrFileCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amrFileCodec.h; sourceTree = "<group>"; };
+		26F41BFA1EB0B70F00F4A929 /* amrFileCodec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = amrFileCodec.mm; sourceTree = "<group>"; };
+		26F41BFC1EB0B70F00F4A929 /* libopencore-amrnb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrnb.a"; sourceTree = "<group>"; };
+		26F41BFD1EB0B70F00F4A929 /* libopencore-amrwb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrwb.a"; sourceTree = "<group>"; };
+		26F41BFF1EB0B70F00F4A929 /* interf_dec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_dec.h; sourceTree = "<group>"; };
+		26F41C001EB0B70F00F4A929 /* interf_enc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_enc.h; sourceTree = "<group>"; };
+		26F41C021EB0B70F00F4A929 /* dec_if.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dec_if.h; sourceTree = "<group>"; };
+		26F41C031EB0B70F00F4A929 /* if_rom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_rom.h; sourceTree = "<group>"; };
+		26F41C041EB0B70F00F4A929 /* VoiceConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceConverter.h; sourceTree = "<group>"; };
+		26F41C051EB0B70F00F4A929 /* VoiceConverter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VoiceConverter.mm; sourceTree = "<group>"; };
+		26F41C0A1EB0B73000F4A929 /* WavConvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WavConvert.h; sourceTree = "<group>"; };
+		26F41C0B1EB0B73000F4A929 /* WavConvert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WavConvert.m; sourceTree = "<group>"; };
+		26F41C0D1EB0B76400F4A929 /* AvdioTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvdioTool.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +93,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				26800E991EA8BC960048D8A7 /* SwiftSocket.framework in Frameworks */,
+				26F41C081EB0B70F00F4A929 /* libopencore-amrwb.a in Frameworks */,
+				26F41C071EB0B70F00F4A929 /* libopencore-amrnb.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,12 +130,15 @@
 		26800E701EA8B9920048D8A7 /* SwiftSocketDemo */ = {
 			isa = PBXGroup;
 			children = (
+				26F41BF61EB0B6E900F4A929 /* voiceConvert */,
 				26150CB11EAEE75E00F2B5BF /* DispatchQueue-Extension.swift */,
+				26F41C0D1EB0B76400F4A929 /* AvdioTool.swift */,
 				26800E711EA8B9920048D8A7 /* AppDelegate.swift */,
 				26800E731EA8B9920048D8A7 /* ViewController.swift */,
 				26150CB51EAF221900F2B5BF /* zdx.png */,
 				26150CB31EAF213600F2B5BF /* wqwe.png */,
 				26800E751EA8B9920048D8A7 /* Main.storyboard */,
+				26150CB71EAF24EC00F2B5BF /* test.mp3 */,
 				26800E781EA8B9920048D8A7 /* Assets.xcassets */,
 				26150CAD1EAE1E1F00F2B5BF /* ooo.png */,
 				26150CAF1EAE29B500F2B5BF /* thumb.png */,
@@ -128,6 +155,58 @@
 				26800E881EA8B9920048D8A7 /* Info.plist */,
 			);
 			path = SwiftSocketDemoTests;
+			sourceTree = "<group>";
+		};
+		26F41BF61EB0B6E900F4A929 /* voiceConvert */ = {
+			isa = PBXGroup;
+			children = (
+				26F41BF81EB0B70F00F4A929 /* amrwapper */,
+				26F41BFB1EB0B70F00F4A929 /* lib */,
+				26F41BFE1EB0B70F00F4A929 /* opencore-amrnb */,
+				26F41C011EB0B70F00F4A929 /* opencore-amrwb */,
+				26F41C041EB0B70F00F4A929 /* VoiceConverter.h */,
+				26F41C051EB0B70F00F4A929 /* VoiceConverter.mm */,
+				26F41BF71EB0B70E00F4A929 /* SwiftSocketDemo-Bridging-Header.h */,
+				26F41C0A1EB0B73000F4A929 /* WavConvert.h */,
+				26F41C0B1EB0B73000F4A929 /* WavConvert.m */,
+			);
+			name = voiceConvert;
+			sourceTree = "<group>";
+		};
+		26F41BF81EB0B70F00F4A929 /* amrwapper */ = {
+			isa = PBXGroup;
+			children = (
+				26F41BF91EB0B70F00F4A929 /* amrFileCodec.h */,
+				26F41BFA1EB0B70F00F4A929 /* amrFileCodec.mm */,
+			);
+			path = amrwapper;
+			sourceTree = "<group>";
+		};
+		26F41BFB1EB0B70F00F4A929 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				26F41BFC1EB0B70F00F4A929 /* libopencore-amrnb.a */,
+				26F41BFD1EB0B70F00F4A929 /* libopencore-amrwb.a */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		26F41BFE1EB0B70F00F4A929 /* opencore-amrnb */ = {
+			isa = PBXGroup;
+			children = (
+				26F41BFF1EB0B70F00F4A929 /* interf_dec.h */,
+				26F41C001EB0B70F00F4A929 /* interf_enc.h */,
+			);
+			path = "opencore-amrnb";
+			sourceTree = "<group>";
+		};
+		26F41C011EB0B70F00F4A929 /* opencore-amrwb */ = {
+			isa = PBXGroup;
+			children = (
+				26F41C021EB0B70F00F4A929 /* dec_if.h */,
+				26F41C031EB0B70F00F4A929 /* if_rom.h */,
+			);
+			path = "opencore-amrwb";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,6 +261,7 @@
 					26800E6D1EA8B9920048D8A7 = {
 						CreatedOnToolsVersion = 8.3.1;
 						DevelopmentTeam = E38L2YCTY3;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 					26800E811EA8B9920048D8A7 = {
@@ -222,6 +302,7 @@
 				26150CAE1EAE1E1F00F2B5BF /* ooo.png in Resources */,
 				26800E771EA8B9920048D8A7 /* Main.storyboard in Resources */,
 				26150CB41EAF213600F2B5BF /* wqwe.png in Resources */,
+				26150CB81EAF24EC00F2B5BF /* test.mp3 in Resources */,
 				26150CB61EAF221900F2B5BF /* zdx.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -240,8 +321,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26F41C091EB0B70F00F4A929 /* VoiceConverter.mm in Sources */,
+				26F41C0E1EB0B76400F4A929 /* AvdioTool.swift in Sources */,
 				26800E741EA8B9920048D8A7 /* ViewController.swift in Sources */,
+				26F41C061EB0B70F00F4A929 /* amrFileCodec.mm in Sources */,
 				26800E721EA8B9920048D8A7 /* AppDelegate.swift in Sources */,
+				26F41C0C1EB0B73000F4A929 /* WavConvert.m in Sources */,
 				26150CB21EAEE75E00F2B5BF /* DispatchQueue-Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -383,6 +468,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = E38L2YCTY3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -391,8 +477,14 @@
 				);
 				INFOPLIST_FILE = SwiftSocketDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SwiftSocketDemo/lib",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zdx.SwiftSocketDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftSocketDemo/SwiftSocketDemo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -401,6 +493,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = E38L2YCTY3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -409,8 +502,13 @@
 				);
 				INFOPLIST_FILE = SwiftSocketDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SwiftSocketDemo/lib",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zdx.SwiftSocketDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftSocketDemo/SwiftSocketDemo-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
