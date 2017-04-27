@@ -13,8 +13,8 @@ import AVFoundation
 class ViewController: UIViewController {
     
     // 网络IP地址 --- 172.168.1.105
-//    let host = "192.168.3.4"
-    let host = "172.168.1.105"
+    let host = "192.168.3.4"
+//    let host = "172.168.1.105"
     
     /// 端口
     let port = 8411
@@ -70,7 +70,7 @@ class ViewController: UIViewController {
         return d
     }()
     
-    var cellIcon : [String] = ["开始录音","停止","转换amr"]
+    var cellIcon : [String] = ["开始录音","停止","转换amr","播放"]
     
     
     lazy var getMsg: UITableView = {
@@ -195,7 +195,7 @@ extension ViewController {
         
         ///f发送语音
         
-        print("\((#file as NSString).lastPathComponent):(\(#line))\n",AvdioTool.shared.voiceData)
+        print("\((#file as NSString).lastPathComponent):(\(#line))\n",AvdioTool.shared.voiceData!)
         
         var int : Int = (AvdioTool.shared.voiceData?.count)!
         
@@ -246,6 +246,7 @@ extension ViewController {
                 }
             }
         } else {
+            /// 剩下的长度
             resetData = leng - resetData
         }
         
@@ -266,6 +267,7 @@ extension ViewController {
                 
                 /// 绘图操作
                 bytfun(_bytes: allbyt)
+                
             }
             
             let backToString = "sdfsdf"
@@ -290,8 +292,7 @@ extension ViewController {
     
     func addimg(data:Data)
     {
-        
-        
+
         if(data.count>50)
         {
 //            DispatchQueue.main.async {
@@ -305,18 +306,31 @@ extension ViewController {
 ////                img.contentMode = .scaleAspectFit
 //                self.view.addSubview(img)
                 
-                do {
-                    let play = try AVAudioPlayer(data: data, fileTypeHint: ".wav")
-                    play.play()
-                    
-                    
-                    
-                    
-                    print("\((#file as NSString).lastPathComponent):(\(#line))\n")
+                /// 保存的路径
+                let savePath = AvdioTool.shared.amrconvertBackWav
+                
 
-                } catch {
-                    print("\((#file as NSString).lastPathComponent):(\(#line))\n",error.localizedDescription)
-                }
+                let dataAsNSData = data as NSData
+                dataAsNSData.write(toFile: savePath!, atomically: true)
+
+                /// 接收回的数据转成wav
+//                VoiceConverter.convertAmr(toWav: String.init(data: data, encoding: .utf8), wavSavePath: AvdioTool.shared.amrconvertBackWav)
+                
+                print("\((#file as NSString).lastPathComponent):(\(#line))\n",AvdioTool.shared.amrconvertBackWav!)
+
+                   AvdioTool.shared.playMp3()
+
+                
+                /// 计数器归零操作，反之上次存储的数据对下一次接收的数据进行干扰
+                
+                self.leng = 0
+                
+                self.resetData = 0
+                
+                self.allbyt = [Byte]()
+
+                
+                print("\((#file as NSString).lastPathComponent):(\(#line))\n",self.allbyt.count)
             }
         }
     }
@@ -330,7 +344,6 @@ extension ViewController : UITableViewDataSource,UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        print("\((#file as NSString).lastPathComponent):(\(#line))\n",indexPath.row)
         switch indexPath.row {
 
             /// 开始录音
@@ -343,10 +356,13 @@ extension ViewController : UITableViewDataSource,UITableViewDelegate {
             AvdioTool.shared.stopRecord()
             
             break
-            /// 转回
+            /// 转码
         case 2:
             AvdioTool.shared.convertWavToAmr()
             
+            break
+        case 3:
+            AvdioTool.shared.playMp3()
             break
         default:
             break
