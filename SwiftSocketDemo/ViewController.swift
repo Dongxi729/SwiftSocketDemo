@@ -13,14 +13,14 @@ import AVFoundation
 class ViewController: UIViewController {
     
     // 网络IP地址 --- 172.168.1.105
-    let host = "192.168.3.4"
-//    let host = "172.168.1.105"
+    //    let host = "192.168.3.4"
+    //    let host = "172.168.1.105"
     
     /// 端口
-    let port = 8411
+    //    let port = 8411
     
-    //    let host = "172.30.33.60"
-    //    let port = 8888
+    let host = "127.0.0.1"
+    let port = 8888
     //
     
     /// 网络IP地址
@@ -35,17 +35,23 @@ class ViewController: UIViewController {
     /// 包体长度
     var leng:Int = 0
     
-    
-    
     var allbyt:[Byte] = [Byte]()
-    
-    /// 接收到的包长度
-    var didReceived : Int = 0
     
     /// 余下的数据
     var resetData : Int = 0
     
     var readData = 4
+    
+    /// 长按录音
+    lazy var lpButton: UIButton = {
+        let d : UIButton = UIButton.init(frame: CGRect.init(x: 100, y: 100, width: 100, height: 100))
+        let longTap = UILongPressGestureRecognizer.init(target: self, action: #selector(longSEL(gesture:)))
+        
+        //        longTap.minimumPressDuration = 0.8
+        d.addGestureRecognizer(longTap)
+        d.backgroundColor = UIColor.gray
+        return d
+    }()
     
     lazy var msgSend: UIButton = {
         let d : UIButton = UIButton.init(frame: CGRect.init(x: 50, y: 200, width: 100, height: 100))
@@ -72,10 +78,10 @@ class ViewController: UIViewController {
     
     var cellIcon : [String] = ["开始录音","停止","转换amr","播放"]
     
-    
+    /// 表格
     lazy var getMsg: UITableView = {
         let d : UITableView = UITableView.init(frame: CGRect.init(x: 200, y: UIScreen.main.bounds.height * 0.5, width: UIScreen.main.bounds.width - 200, height: UIScreen.main.bounds.height * 0.5))
-//        let d : UITableView = UITableView.init(frame:self.view.bounds)
+        //        let d : UITableView = UITableView.init(frame:self.view.bounds)
         d.register(UITableViewCell.self, forCellReuseIdentifier: "cellID")
         d.delegate = self;
         d.dataSource = self;
@@ -117,7 +123,11 @@ class ViewController: UIViewController {
         
         view.addSubview(showGetMsgView)
         
+        /// 录音表格
         view.addSubview(getMsg)
+        
+        /// 长按手势
+        view.addSubview(lpButton)
         
         AvdioTool.shared.creatSession()
         
@@ -150,6 +160,7 @@ class ViewController: UIViewController {
         case .success:
             
             while true {
+               
                 if let msg = readmsg(clientSercer: client) {
                     DispatchQueue.main.async {
                         print("\((#file as NSString).lastPathComponent):(\(#line))\n",msg)
@@ -178,8 +189,10 @@ class ViewController: UIViewController {
 extension ViewController {
     
     func sendMsg(sender : UIButton) -> Void {
-        
+        /// initData
+        leng = 0
         self.sendMessage(msgtosend:sendTfMsg.text!, clientServer: client)
+        
     }
     
     //发送消息
@@ -195,34 +208,40 @@ extension ViewController {
         
         ///f发送语音
         
-        print("\((#file as NSString).lastPathComponent):(\(#line))\n",AvdioTool.shared.voiceData!)
-        
-        var int : Int = (AvdioTool.shared.voiceData?.count)!
-        
-        let data2 : NSMutableData = NSMutableData()
-        
-        data2.append(&int, length: 4)
-        
-        data2.append(AvdioTool.shared.voiceData!)
-        
-        guard let socket = clientServer else {
-            return
-        }
-        print("aaaa",data2.length)
-        switch socket.send(data: data2 as Data) {
-        case .success:
-            print("\((#file as NSString).lastPathComponent):(\(#line))\n","发送成功")
-        case .failure( _):
+        if let vvoiceData = AvdioTool.shared.voiceData {
+            var int : Int = vvoiceData.count
             
-            print("\((#file as NSString).lastPathComponent):(\(#line))\n","断开连接")
+            let data2 : NSMutableData = NSMutableData()
+            
+            data2.append(&int, length: 4)
+            
+            data2.append(vvoiceData)
+            
+            guard let socket = clientServer else {
+                return
+            }
+            print("aaaa",data2.length)
+            
+            /// 偶尔发送异常失败  。。。。
+            switch socket.send(data: data2 as Data) {
+                
+            
+            case .success:
+                print("\((#file as NSString).lastPathComponent):(\(#line))\n","发送成功")
+            case .failure( _):
+                
+                print("\((#file as NSString).lastPathComponent):(\(#line))\n","断开连接")
+            }
+        } else {
+            print("\((#file as NSString).lastPathComponent):(\(#line))\n","语音信息为空")
         }
     }
     
     /// 读取信息
-    func readmsg(clientSercer : TCPClient)->String?{
+    func readmsg(clientSercer : TCPClient)->String? {
         //read 4 byte int as type
-        
-        print("\((#file as NSString).lastPathComponent):(\(#line))\n")
+
+        print("\((#file as NSString).lastPathComponent):(\(#line))\n",allbyt.count)
         
         /// 接收包头长度
         if leng == 0 {
@@ -234,40 +253,52 @@ extension ViewController {
                     var len:Int32 = 0
                     
                     ndata.getBytes(&len, length: data.count)
+
                     
-                    /// 总长度
                     allbyt = [Byte]()
                     leng = Int(len)
-                    
-                    /// 余下的数据
-                    resetData = leng
-                    
-                    print("\((#file as NSString).lastPathComponent):(\(#line))\n",leng)
+
+                    /// 收到的字节长度
+                    if leng > 0 {
+                        /// 余下的数据
+                        resetData = leng
+                        
+                        
+                    } else {
+                        print("\((#file as NSString).lastPathComponent):(\(#line))\n","数据异常")
+                        return nil
+                    }
                 }
             }
         } else {
-            /// 剩下的长度
-            resetData = leng - resetData
+            
+            if leng > 0 {
+                /// 剩下的长度
+                resetData = leng - resetData
+            }
+            
+            
+            print("\((#file as NSString).lastPathComponent):(\(#line))\n",resetData)
         }
         
         /// 问题每次都重新读取数据,相当于初始化  百搭
         if let buff = clientSercer.read(resetData) {
             
-            resetData = leng - buff.count
+            print("\((#file as NSString).lastPathComponent):(\(#line))\n","=======")
+            
+            if leng > 0 {
+                resetData = leng - buff.count
+            }
             
             /// 接收到的
-            didReceived = buff.count
-            
             allbyt = allbyt + buff
-
-            print("\((#file as NSString).lastPathComponent):(\(#line))\n",allbyt.count)
-
+            
+            
             if allbyt.count == leng {
                 print("\((#file as NSString).lastPathComponent):(\(#line))\n")
                 
                 /// 绘图操作
                 bytfun(_bytes: allbyt)
-                
             }
             
             let backToString = "sdfsdf"
@@ -277,7 +308,7 @@ extension ViewController {
         
         return nil
     }
-
+    
     /// 绘图操作
     func bytfun(_bytes:[Byte])
     {
@@ -292,34 +323,28 @@ extension ViewController {
     
     func addimg(data:Data)
     {
-
+        
         if(data.count>50)
         {
-//            DispatchQueue.main.async {
-//                let img = UIImageView(image: UIImage(data: data)!)
-////                img.contentMode = .scaleAspectFit
-//                self.view.addSubview(img)
-//            }
             
             DispatchQueue.main.async {
-//                let img = UIImageView(image: UIImage(data: data)!)
-////                img.contentMode = .scaleAspectFit
-//                self.view.addSubview(img)
+                //                let img = UIImageView(image: UIImage(data: data)!)
+                ////                img.contentMode = .scaleAspectFit
+                //                self.view.addSubview(img)
                 
                 /// 保存的路径
                 let savePath = AvdioTool.shared.amrconvertBackWav
                 
-
+                
                 let dataAsNSData = data as NSData
                 dataAsNSData.write(toFile: savePath!, atomically: true)
-
+                
                 /// 接收回的数据转成wav
-//                VoiceConverter.convertAmr(toWav: String.init(data: data, encoding: .utf8), wavSavePath: AvdioTool.shared.amrconvertBackWav)
                 
                 print("\((#file as NSString).lastPathComponent):(\(#line))\n",AvdioTool.shared.amrconvertBackWav!)
-
-                   AvdioTool.shared.playMp3()
-
+                
+                AvdioTool.shared.playMp3()
+                
                 
                 /// 计数器归零操作，反之上次存储的数据对下一次接收的数据进行干扰
                 
@@ -327,11 +352,33 @@ extension ViewController {
                 
                 self.resetData = 0
                 
-                self.allbyt = [Byte]()
-
+                
                 
                 print("\((#file as NSString).lastPathComponent):(\(#line))\n",self.allbyt.count)
             }
+        }
+    }
+}
+
+
+// MARK: - 长按手势
+extension ViewController {
+    func longSEL(gesture : UILongPressGestureRecognizer) -> Void {
+        print("\((#file as NSString).lastPathComponent):(\(#line))\n")
+        
+        if gesture.state == .began {
+            print("\((#file as NSString).lastPathComponent):(\(#line))\n","长按事件")
+            
+            AvdioTool.shared.startRecord()
+        } else {
+            
+            AvdioTool.shared.stopRecord()
+            
+            AvdioTool.shared.convertWavToAmr()
+            
+            
+            print("\((#file as NSString).lastPathComponent):(\(#line))\n","结束")
+            
         }
     }
 }
@@ -345,18 +392,18 @@ extension ViewController : UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         switch indexPath.row {
-
-            /// 开始录音
+            
+        /// 开始录音
         case 0:
             AvdioTool.shared.startRecord()
             
             break
-            /// 停止录音
+        /// 停止录音
         case 1:
             AvdioTool.shared.stopRecord()
             
             break
-            /// 转码
+        /// 转码
         case 2:
             AvdioTool.shared.convertWavToAmr()
             

@@ -28,6 +28,7 @@ class AvdioTool: NSObject {
 
     fileprivate var player: AVAudioPlayer?
     
+    /// 存放二进制字节流
     var voiceData : Data?
     
     static let shared = AvdioTool()
@@ -98,24 +99,15 @@ class AvdioTool: NSObject {
     /// 转换wav
     func convertWavToAmr() -> Void {
         
-        print("\((#file as NSString).lastPathComponent):(\(#line))\n",cafPath as Any)
-
         /// 转换wav 到 amr
         VoiceConverter.convertWav(toAmr: cafPath, amrSavePath: amrPath)
-        
-        
-        print("\((#file as NSString).lastPathComponent):(\(#line))\n",cafPath as Any)
+
 
         /// 将本地压缩好的文件amr文件上传
         voiceData = FileManager.default.contents(atPath: amrPath!)
-        
-        print("\((#file as NSString).lastPathComponent):(\(#line))\n",voiceData!)
-    
+
         
         print("\((#file as NSString).lastPathComponent):(\(#line))\n",amrPath as Any)
-    
-        print(cafPath!)
-        print(mp3Path!)
     }
 
     /// 开始录音
