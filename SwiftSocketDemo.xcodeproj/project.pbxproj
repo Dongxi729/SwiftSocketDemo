@@ -13,6 +13,7 @@
 		26150CB41EAF213600F2B5BF /* wqwe.png in Resources */ = {isa = PBXBuildFile; fileRef = 26150CB31EAF213600F2B5BF /* wqwe.png */; };
 		26150CB61EAF221900F2B5BF /* zdx.png in Resources */ = {isa = PBXBuildFile; fileRef = 26150CB51EAF221900F2B5BF /* zdx.png */; };
 		26150CB81EAF24EC00F2B5BF /* test.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 26150CB71EAF24EC00F2B5BF /* test.mp3 */; };
+		2657FDC01EBA02F700B92648 /* SendAndReNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2657FDBF1EBA02F700B92648 /* SendAndReNew.swift */; };
 		26800E721EA8B9920048D8A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26800E711EA8B9920048D8A7 /* AppDelegate.swift */; };
 		26800E741EA8B9920048D8A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26800E731EA8B9920048D8A7 /* ViewController.swift */; };
 		26800E771EA8B9920048D8A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26800E751EA8B9920048D8A7 /* Main.storyboard */; };
@@ -21,6 +22,9 @@
 		26800E871EA8B9920048D8A7 /* SwiftSocketDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26800E861EA8B9920048D8A7 /* SwiftSocketDemoTests.swift */; };
 		26800E991EA8BC960048D8A7 /* SwiftSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26800E981EA8BC960048D8A7 /* SwiftSocket.framework */; };
 		26800E9A1EA8BC960048D8A7 /* SwiftSocket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26800E981EA8BC960048D8A7 /* SwiftSocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		26EBDE001EBAF49200137E42 /* aaaa.png in Resources */ = {isa = PBXBuildFile; fileRef = 26EBDDFF1EBAF49200137E42 /* aaaa.png */; };
+		26EBDE021EBAFCA900137E42 /* bbbb.png in Resources */ = {isa = PBXBuildFile; fileRef = 26EBDE011EBAFCA900137E42 /* bbbb.png */; };
+		26EBDE041EBAFF9D00137E42 /* cccc.png in Resources */ = {isa = PBXBuildFile; fileRef = 26EBDE031EBAFF9D00137E42 /* cccc.png */; };
 		26F41C061EB0B70F00F4A929 /* amrFileCodec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26F41BFA1EB0B70F00F4A929 /* amrFileCodec.mm */; };
 		26F41C071EB0B70F00F4A929 /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F41BFC1EB0B70F00F4A929 /* libopencore-amrnb.a */; };
 		26F41C081EB0B70F00F4A929 /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F41BFD1EB0B70F00F4A929 /* libopencore-amrwb.a */; };
@@ -60,6 +64,7 @@
 		26150CB31EAF213600F2B5BF /* wqwe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wqwe.png; sourceTree = "<group>"; };
 		26150CB51EAF221900F2B5BF /* zdx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zdx.png; sourceTree = "<group>"; };
 		26150CB71EAF24EC00F2B5BF /* test.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = test.mp3; sourceTree = "<group>"; };
+		2657FDBF1EBA02F700B92648 /* SendAndReNew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendAndReNew.swift; sourceTree = "<group>"; };
 		26800E6E1EA8B9920048D8A7 /* SwiftSocketDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftSocketDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26800E711EA8B9920048D8A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		26800E731EA8B9920048D8A7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -71,6 +76,11 @@
 		26800E861EA8B9920048D8A7 /* SwiftSocketDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftSocketDemoTests.swift; sourceTree = "<group>"; };
 		26800E881EA8B9920048D8A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		26800E981EA8BC960048D8A7 /* SwiftSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftSocket.framework; sourceTree = "<group>"; };
+		26EBDDFE1EBAD28200137E42 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
+		26EBDDFF1EBAF49200137E42 /* aaaa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aaaa.png; sourceTree = "<group>"; };
+		26EBDE011EBAFCA900137E42 /* bbbb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bbbb.png; sourceTree = "<group>"; };
+		26EBDE031EBAFF9D00137E42 /* cccc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cccc.png; sourceTree = "<group>"; };
+		26EBDE051EBB11D700137E42 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		26F41BF71EB0B70E00F4A929 /* SwiftSocketDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftSocketDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		26F41BF91EB0B70F00F4A929 /* amrFileCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amrFileCodec.h; sourceTree = "<group>"; };
 		26F41BFA1EB0B70F00F4A929 /* amrFileCodec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = amrFileCodec.mm; sourceTree = "<group>"; };
@@ -111,6 +121,7 @@
 		26800E651EA8B9920048D8A7 = {
 			isa = PBXGroup;
 			children = (
+				26EBDE051EBB11D700137E42 /* MyPlayground.playground */,
 				26800E981EA8BC960048D8A7 /* SwiftSocket.framework */,
 				26800E701EA8B9920048D8A7 /* SwiftSocketDemo */,
 				26800E851EA8B9920048D8A7 /* SwiftSocketDemoTests */,
@@ -135,7 +146,12 @@
 				26F41C0D1EB0B76400F4A929 /* AvdioTool.swift */,
 				26800E711EA8B9920048D8A7 /* AppDelegate.swift */,
 				26800E731EA8B9920048D8A7 /* ViewController.swift */,
+				2657FDBF1EBA02F700B92648 /* SendAndReNew.swift */,
+				26EBDDFE1EBAD28200137E42 /* MyPlayground.playground */,
 				26150CB51EAF221900F2B5BF /* zdx.png */,
+				26EBDE011EBAFCA900137E42 /* bbbb.png */,
+				26EBDDFF1EBAF49200137E42 /* aaaa.png */,
+				26EBDE031EBAFF9D00137E42 /* cccc.png */,
 				26150CB31EAF213600F2B5BF /* wqwe.png */,
 				26800E751EA8B9920048D8A7 /* Main.storyboard */,
 				26150CB71EAF24EC00F2B5BF /* test.mp3 */,
@@ -297,10 +313,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				26150CB01EAE29B500F2B5BF /* thumb.png in Resources */,
+				26EBDE021EBAFCA900137E42 /* bbbb.png in Resources */,
 				26800E7C1EA8B9920048D8A7 /* LaunchScreen.storyboard in Resources */,
+				26EBDE001EBAF49200137E42 /* aaaa.png in Resources */,
 				26800E791EA8B9920048D8A7 /* Assets.xcassets in Resources */,
 				26150CAE1EAE1E1F00F2B5BF /* ooo.png in Resources */,
 				26800E771EA8B9920048D8A7 /* Main.storyboard in Resources */,
+				26EBDE041EBAFF9D00137E42 /* cccc.png in Resources */,
 				26150CB41EAF213600F2B5BF /* wqwe.png in Resources */,
 				26150CB81EAF24EC00F2B5BF /* test.mp3 in Resources */,
 				26150CB61EAF221900F2B5BF /* zdx.png in Resources */,
@@ -324,6 +343,7 @@
 				26F41C091EB0B70F00F4A929 /* VoiceConverter.mm in Sources */,
 				26F41C0E1EB0B76400F4A929 /* AvdioTool.swift in Sources */,
 				26800E741EA8B9920048D8A7 /* ViewController.swift in Sources */,
+				2657FDC01EBA02F700B92648 /* SendAndReNew.swift in Sources */,
 				26F41C061EB0B70F00F4A929 /* amrFileCodec.mm in Sources */,
 				26800E721EA8B9920048D8A7 /* AppDelegate.swift in Sources */,
 				26F41C0C1EB0B73000F4A929 /* WavConvert.m in Sources */,

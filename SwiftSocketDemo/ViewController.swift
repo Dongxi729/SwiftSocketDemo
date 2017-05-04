@@ -32,6 +32,8 @@ class ViewController: UIViewController {
     /// 发送信息按钮
     
     
+    var index : Int = 0
+    
     /// 包体长度
     var leng:Int = 0
     
@@ -40,7 +42,13 @@ class ViewController: UIViewController {
     /// 余下的数据
     var resetData : Int = 0
     
-    var readData = 4
+    
+    var imgview : UIImageView?
+    
+    
+    var ssss : Int = 0
+    
+    
     
     /// 长按录音
     lazy var lpButton: UIButton = {
@@ -160,15 +168,14 @@ class ViewController: UIViewController {
         case .success:
             
             while true {
-               
+                
                 if let msg = readmsg(clientSercer: client) {
                     DispatchQueue.main.async {
-                        print("\((#file as NSString).lastPathComponent):(\(#line))\n",msg)
                         
-                        if !msg.contains("用户") {
-                            
-                            self.showGetMsgView.text = msg
-                        }
+//                        if !msg.contains("用户") {
+//                            
+//                            self.showGetMsgView.text = msg
+//                        }
                     }
                 } else {
                     print("\((#file as NSString).lastPathComponent):(\(#line))\n","连接失败")
@@ -179,11 +186,18 @@ class ViewController: UIViewController {
                 }
             }
             
-        case .failure(let _):
+
+            
+        case .failure( _):
             
             print("\((#file as NSString).lastPathComponent):(\(#line))\n","服务器状态不好或连接不上")
         }
     }
+    
+    
+    var bodyarr:[Byte] = [Byte]()
+    
+    
 }
 
 extension ViewController {
@@ -202,112 +216,166 @@ extension ViewController {
         ///
         // let imgdata = msgtosend.data(using: .utf8)
         
+        print("\((#file as NSString).lastPathComponent):(\(#line))\n")
         
-        let img = UIImage.init(named: "wqwe")
+        
+        let img = UIImage.init(named: "cccc")
         let imgdata = UIImagePNGRepresentation(img!)
         
         ///f发送语音
         
-        if let vvoiceData = AvdioTool.shared.voiceData {
-            var int : Int = vvoiceData.count
+        
+        if clientServer != nil {
             
-            let data2 : NSMutableData = NSMutableData()
-            
-            data2.append(&int, length: 4)
-            
-            data2.append(vvoiceData)
-            
-            guard let socket = clientServer else {
-                return
-            }
-            print("aaaa",data2.length)
-            
-            /// 偶尔发送异常失败  。。。。
-            switch socket.send(data: data2 as Data) {
+            if let vvoiceData = imgdata {
+                var int : Int = vvoiceData.count
                 
-            
-            case .success:
-                print("\((#file as NSString).lastPathComponent):(\(#line))\n","发送成功")
-            case .failure( _):
+                print("\((#file as NSString).lastPathComponent):(\(#line))\n","发送包的大小为:" + String(int))
                 
-                print("\((#file as NSString).lastPathComponent):(\(#line))\n","断开连接")
+                let data2 : NSMutableData = NSMutableData()
+                
+                
+                data2.append(&int, length: 4)
+                
+                data2.append(vvoiceData)
+                
+                guard let socket = clientServer else {
+                    return
+                }
+                
+                if data2.length > 0 {
+                    /// 偶尔发送异常失败  。。。。
+                    switch socket.send(data: data2 as Data) {
+                        
+                        
+                    case .success:
+                        print("\((#file as NSString).lastPathComponent):(\(#line))\n","发送成功")
+                    case .failure( _):
+                        
+                        print("\((#file as NSString).lastPathComponent):(\(#line))\n","断开连接")
+                    }
+                } else {
+                    print("\((#file as NSString).lastPathComponent):(\(#line))\n","语音信息为空")
+                }
+                
+                
+            } else {
+                print("\((#file as NSString).lastPathComponent):(\(#line))\n","语音信息为空")
             }
-        } else {
-            print("\((#file as NSString).lastPathComponent):(\(#line))\n","语音信息为空")
         }
+        
+        
     }
     
     /// 读取信息
     func readmsg(clientSercer : TCPClient)->String? {
         //read 4 byte int as type
 
-        print("\((#file as NSString).lastPathComponent):(\(#line))\n",allbyt.count)
+        /// 缓存池数据
+        let d = clientSercer.read(1024 * 10)
         
-        /// 接收包头长度
+        //ssss = ssss + (d?.count)!
+        
+      //  print("----",ssss)
+
+        /// 绩溪县
+        if d != nil {
+            testAnyalse(ddd: d!)
+        }
+        
+        
+
+        
+        return "test"
+    }
+    
+    
+   
+    
+    func testAnyalse(ddd : [Byte]) -> Void {
+        var arrdt : [Byte] = []
+        bodyarr.append(contentsOf: ddd)
+        
         if leng == 0 {
-            if let data = clientSercer.read(4) {
+            
+            ///
+            if bodyarr.count >= 4 {
+                arrdt.append(ddd[0])
+                arrdt.append(ddd[1])
+                arrdt.append(ddd[2])
+                arrdt.append(ddd[3])
                 
-                /// 得到读取多少长度
-                if data.count == 4 {
-                    let ndata = NSData(bytes: data, length: data.count)
-                    var len:Int32 = 0
-                    
-                    ndata.getBytes(&len, length: data.count)
-
-                    
-                    allbyt = [Byte]()
-                    leng = Int(len)
-
-                    /// 收到的字节长度
-                    if leng > 0 {
-                        /// 余下的数据
-                        resetData = leng
-                        
-                        
-                    } else {
-                        print("\((#file as NSString).lastPathComponent):(\(#line))\n","数据异常")
-                        return nil
-                    }
+                bodyarr.remove(at: 0)
+                bodyarr.remove(at: 0)
+                bodyarr.remove(at: 0)
+                bodyarr.remove(at: 0)
+                let convertData = NSData.init(bytes: &arrdt, length: 4)
+                convertData.getBytes(&leng, length: convertData.length)
+                print("leng :",leng)
+            }
+            else
+            {
+                return
+            }
+        }
+        else
+        {
+            //主体解析
+            if(bodyarr.count >= leng)
+            {
+                
+                var bodyarr2 = [Byte]()
+                //可以解析
+                for _ in 0..<leng
+                {
+                    bodyarr2.append(bodyarr[0])
+                    bodyarr.remove(at: 0)
+                }
+                datafun(_over: bodyarr2)
+                leng = 0
+                
+                if(bodyarr.count > 0 )
+                {
+                    testAnyalse(ddd: [])
                 }
             }
-        } else {
-            
-            if leng > 0 {
-                /// 剩下的长度
-                resetData = leng - resetData
+            else
+            {
+                //不能解析
             }
-            
-            
-            print("\((#file as NSString).lastPathComponent):(\(#line))\n",resetData)
         }
-        
-        /// 问题每次都重新读取数据,相当于初始化  百搭
-        if let buff = clientSercer.read(resetData) {
-            
-            print("\((#file as NSString).lastPathComponent):(\(#line))\n","=======")
-            
-            if leng > 0 {
-                resetData = leng - buff.count
-            }
-            
-            /// 接收到的
-            allbyt = allbyt + buff
-            
-            
-            if allbyt.count == leng {
-                print("\((#file as NSString).lastPathComponent):(\(#line))\n")
-                
-                /// 绘图操作
-                bytfun(_bytes: allbyt)
-            }
-            
-            let backToString = "sdfsdf"
-            
-            return backToString
-        }
-        
-        return nil
     }
+    
+    
+    func datafun(_over:[Byte])
+    {
+        //最后的数据
+        
+        print("水水水水",_over.count)
+        
+        
+        
+        DispatchQueue.main.async {
+            
+            let ddd = UIImageView.init(frame: CGRect.init(x: 0, y: self.index, width: 100, height: 100))
+            
+            ddd.backgroundColor = UIColor.blue
+            
+            let imfDara = NSData.init(bytes: _over, length: _over.count)
+            
+            ddd.image = UIImage.init(data: imfDara as Data)
+            
+            self.view.addSubview(ddd)
+            
+            self.index += 100
+        }
+        
+       
+        
+    }
+    
+    
+    
     
     /// 绘图操作
     func bytfun(_bytes:[Byte])
@@ -316,6 +384,8 @@ extension ViewController {
         
         if(allbyt.count >= leng){
             let msgd = Data(bytes: allbyt, count: leng)
+            
+            
             addimg(data: msgd)
         }
     }
@@ -328,35 +398,38 @@ extension ViewController {
         {
             
             DispatchQueue.main.async {
-                //                let img = UIImageView(image: UIImage(data: data)!)
-                ////                img.contentMode = .scaleAspectFit
-                //                self.view.addSubview(img)
+                
+                /// 添加图片
+                self.imgview = UIImageView(image: UIImage(data: data)!)
+                //                img.contentMode = .scaleAspectFit
+                self.view.addSubview(self.imgview!)
+                
+                
+                
                 
                 /// 保存的路径
-                let savePath = AvdioTool.shared.amrconvertBackWav
-                
-                
-                let dataAsNSData = data as NSData
-                dataAsNSData.write(toFile: savePath!, atomically: true)
+                //                let savePath = AvdioTool.shared.amrconvertBackWav
+                //
+                //
+                //                let dataAsNSData = data as NSData
+                //                dataAsNSData.write(toFile: savePath!, atomically: true)
                 
                 /// 接收回的数据转成wav
                 
-                print("\((#file as NSString).lastPathComponent):(\(#line))\n",AvdioTool.shared.amrconvertBackWav!)
-                
-                AvdioTool.shared.playMp3()
-                
+                //                AvdioTool.shared.playMp3()
                 
                 /// 计数器归零操作，反之上次存储的数据对下一次接收的数据进行干扰
-                
                 self.leng = 0
                 
                 self.resetData = 0
                 
-                
-                
-                print("\((#file as NSString).lastPathComponent):(\(#line))\n",self.allbyt.count)
+                //                self.allbyt = [Byte]()
             }
         }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.imgview?.removeFromSuperview()
     }
 }
 
