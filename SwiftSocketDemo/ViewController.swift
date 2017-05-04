@@ -171,11 +171,7 @@ class ViewController: UIViewController {
                 
                 if let msg = readmsg(clientSercer: client) {
                     DispatchQueue.main.async {
-                        
-//                        if !msg.contains("用户") {
-//                            
-//                            self.showGetMsgView.text = msg
-//                        }
+
                     }
                 } else {
                     print("\((#file as NSString).lastPathComponent):(\(#line))\n","连接失败")
@@ -186,7 +182,7 @@ class ViewController: UIViewController {
                 }
             }
             
-
+            
             
         case .failure( _):
             
@@ -194,9 +190,173 @@ class ViewController: UIViewController {
         }
     }
     
+    /// 用作存储收到的字节流长度
+    var bodyBytesAny:[Byte] = [Byte]()
     
-    var bodyarr:[Byte] = [Byte]()
     
+    /// 读取信息
+    func readmsg(clientSercer : TCPClient)->String? {
+        //read 4 byte int as type
+        
+        /// 缓存池数据
+        let d = clientSercer.read(1024 * 10)
+        
+        //ssss = ssss + (d?.count)!
+        
+        //  print("----",ssss)
+        
+        /// 绩溪县
+        if d != nil {
+            byteAnalyse(ddd: d!)
+        }
+        
+        return "test"
+    }
+    
+    
+    
+    
+    /// 数据解析
+    func byteAnalyse(ddd : [Byte]) -> Void {
+        /// 记录包头的值
+        var headCountBytes : [Byte] = []
+        
+        /// 身体接收操作
+        bodyBytesAny.append(contentsOf: ddd)
+        
+        
+        if leng == 0 {
+            
+            /// 完整的包头长度为4
+            if bodyBytesAny.count >= 4 {
+                headCountBytes.append(bodyBytesAny[0])
+                headCountBytes.append(bodyBytesAny[1])
+                headCountBytes.append(bodyBytesAny[2])
+                headCountBytes.append(bodyBytesAny[3])
+                
+                bodyBytesAny.remove(at: 0)
+                bodyBytesAny.remove(at: 0)
+                bodyBytesAny.remove(at: 0)
+                bodyBytesAny.remove(at: 0)
+                
+                /// 读取包头指定四个字节的长度
+                let convertData = NSData.init(bytes: &headCountBytes, length: 4)
+                
+                /// 获取包头长度
+                convertData.getBytes(&leng, length: convertData.length)
+                
+                leng = leng + 8
+                
+                print("leng :",leng)
+                bodyfun()
+            }
+            else
+            {
+                return
+            }
+        }
+            /// 解析操作
+        else
+        {
+            bodyfun()
+        }
+    }
+    
+    
+    
+    func bodyfun()
+    {
+        //主体解析
+        if(bodyBytesAny.count >= leng)
+        {
+            
+            /// 记录字节流数据
+            var bodyData = [Byte]()
+            
+            //可以解析
+            for _ in 0..<leng
+            {
+                bodyData.append(bodyBytesAny[0])
+                bodyBytesAny.remove(at: 0)
+            }
+            
+            /// 复制一份数据出来拿出来操作(显示操作)
+            
+            bytesShwoFunc(_over: bodyData)
+            
+            
+            
+            /// 清空操作
+            leng = 0
+            
+            
+            /// 如果存储身体数组长度大于0
+            if(bodyBytesAny.count > 0 )
+            {
+                /// 调用本身
+                byteAnalyse(ddd: [])
+            }
+        }
+        else
+        {
+            //不能解析
+        }
+
+    }
+    
+    
+    
+    
+    
+    /// 最后的操作函数
+    func bytesShwoFunc(_over:[Byte])
+    {
+        //最后的数据
+        
+        allbyt = _over
+        
+        print(_over)
+        
+        /// 添加类型后总长度增加了8，要减去8
+        for i in 0..<8 {
+            
+            allbyt.remove(at: 0)
+            
+            
+            /// 剪完8次后为我们要得到的真正数据
+            if i == 7 {
+                
+                print("水水水水",allbyt)
+                
+                DispatchQueue.main.async {
+                    
+                    let ddd = UIImageView.init(frame: CGRect.init(x: 0, y: self.index, width: 100, height: 100))
+                    
+                    ddd.backgroundColor = UIColor.blue
+                    
+                    let imfDara = NSData.init(bytes: self.allbyt, length: self.allbyt.count)
+                    
+                    ddd.image = UIImage.init(data: imfDara as Data)
+                    
+                    self.view.addSubview(ddd)
+                    
+                    self.index += 100
+                    //            let imfDara = NSData.init(bytes: _over, length: _over.count)
+                    //
+                    //            let sss = String.init(data: imfDara as Data, encoding: .utf8)
+                    //            
+                    //            print("字符串",sss as Any)
+                }
+            }
+        }
+        
+        
+        
+    }
+    
+    var sendStr : String?
+    
+    var sendDataStr : Data?
     
 }
 
@@ -216,35 +376,99 @@ extension ViewController {
         ///
         // let imgdata = msgtosend.data(using: .utf8)
         
-        print("\((#file as NSString).lastPathComponent):(\(#line))\n")
-        
-        
+//        print("\((#file as NSString).lastPathComponent):(\(#line))\n")
+//        
+//        /// 数据解析
         let img = UIImage.init(named: "cccc")
         let imgdata = UIImagePNGRepresentation(img!)
         
-        ///f发送语音
+        
+//
+//        
+//        
+//        sendStr = "aaa,bbb,cccaaa,bbb"
+//        
+//        
+//        
+//        sendDataStr = sendStr?.data(using: String.Encoding.utf8)
+//        
+//        let datacc : NSMutableData = NSMutableData()
+//        
+//        let stta = "1asdfjlksdfjkhsfjk232782ywriusdfgjbsdf"
+//        let d1 = stta.data(using: String.Encoding.utf8)
+//        var it1  = d1?.count;
+//        
+//        /// 类型
+//        var myInt = 2
+//        var myIntData = Data(bytes: &myInt,
+//                             count: MemoryLayout.size(ofValue: myInt))
+////        datacc.append(&myIntData, length: 1)
+//        datacc.append(&it1, length: 4)
+//        datacc.append(d1!)
+//        
+//        
+//        
+//        let stta1 = "bsdfkljsdfk238792uyfkhdfkjsdnf"
+//        let d2 = stta1.data(using: String.Encoding.utf8)
+//        var it2  = d2?.count;
+//        
+//        ///// 6  99
+//        
+//        datacc.append(&it2, length: 4)
+//        
+//        datacc.append(d2!)
+//
+//        
+//        let stta2 = "cslkdfhjksdhfjk238ydhfjksdnbfmsdbmsdnf,smdfjsdkjghiuy342iuhfjkwebfjkwehfuiw2y32893uyhrkjwfjksdkjf"
+//        let d3 = stta2.data(using: String.Encoding.utf8)
+//        var it3  = d3?.count;
+//        datacc.append(&it3, length: 4)
+//        datacc.append(d3!)
+//        
+//        
+//        guard let socket = clientServer else {
+//            return
+//        }
+//        
+//        socket.send(data: datacc as Data)
+
+        
         
         
         if clientServer != nil {
             
-            if let vvoiceData = imgdata {
-                var int : Int = vvoiceData.count
+            if let sendData = imgdata {
+                var int : Int = sendData.count
                 
                 print("\((#file as NSString).lastPathComponent):(\(#line))\n","发送包的大小为:" + String(int))
                 
                 let data2 : NSMutableData = NSMutableData()
                 
                 
+                /// 类型
+                var myInt = 8
+                var myIntData = Data(bytes: &myInt,
+                                     count: MemoryLayout.size(ofValue: myInt))
+                /// 告诉发送的数据的长度
                 data2.append(&int, length: 4)
                 
-                data2.append(vvoiceData)
+                /// 告诉发送的类型的长度
+                data2.append(&myIntData.count,length :0)
+                
+                print("\((#file as NSString).lastPathComponent):(\(#line))\n",myIntData.count)
+                
+                data2.append(myIntData)
+                
+                data2.append(sendData)
+                
+                
                 
                 guard let socket = clientServer else {
                     return
                 }
                 
                 if data2.length > 0 {
-                    /// 偶尔发送异常失败  。。。。
+                    
                     switch socket.send(data: data2 as Data) {
                         
                         
@@ -263,174 +487,8 @@ extension ViewController {
                 print("\((#file as NSString).lastPathComponent):(\(#line))\n","语音信息为空")
             }
         }
-        
-        
     }
     
-    /// 读取信息
-    func readmsg(clientSercer : TCPClient)->String? {
-        //read 4 byte int as type
-
-        /// 缓存池数据
-        let d = clientSercer.read(1024 * 10)
-        
-        //ssss = ssss + (d?.count)!
-        
-      //  print("----",ssss)
-
-        /// 绩溪县
-        if d != nil {
-            testAnyalse(ddd: d!)
-        }
-        
-        
-
-        
-        return "test"
-    }
-    
-    
-   
-    
-    func testAnyalse(ddd : [Byte]) -> Void {
-        var arrdt : [Byte] = []
-        bodyarr.append(contentsOf: ddd)
-        
-        if leng == 0 {
-            
-            ///
-            if bodyarr.count >= 4 {
-                arrdt.append(ddd[0])
-                arrdt.append(ddd[1])
-                arrdt.append(ddd[2])
-                arrdt.append(ddd[3])
-                
-                bodyarr.remove(at: 0)
-                bodyarr.remove(at: 0)
-                bodyarr.remove(at: 0)
-                bodyarr.remove(at: 0)
-                let convertData = NSData.init(bytes: &arrdt, length: 4)
-                convertData.getBytes(&leng, length: convertData.length)
-                print("leng :",leng)
-            }
-            else
-            {
-                return
-            }
-        }
-        else
-        {
-            //主体解析
-            if(bodyarr.count >= leng)
-            {
-                
-                var bodyarr2 = [Byte]()
-                //可以解析
-                for _ in 0..<leng
-                {
-                    bodyarr2.append(bodyarr[0])
-                    bodyarr.remove(at: 0)
-                }
-                datafun(_over: bodyarr2)
-                leng = 0
-                
-                if(bodyarr.count > 0 )
-                {
-                    testAnyalse(ddd: [])
-                }
-            }
-            else
-            {
-                //不能解析
-            }
-        }
-    }
-    
-    
-    func datafun(_over:[Byte])
-    {
-        //最后的数据
-        
-        print("水水水水",_over.count)
-        
-        
-        
-        DispatchQueue.main.async {
-            
-            let ddd = UIImageView.init(frame: CGRect.init(x: 0, y: self.index, width: 100, height: 100))
-            
-            ddd.backgroundColor = UIColor.blue
-            
-            let imfDara = NSData.init(bytes: _over, length: _over.count)
-            
-            ddd.image = UIImage.init(data: imfDara as Data)
-            
-            self.view.addSubview(ddd)
-            
-            self.index += 100
-        }
-        
-       
-        
-    }
-    
-    
-    
-    
-    /// 绘图操作
-    func bytfun(_bytes:[Byte])
-    {
-        allbyt.append(contentsOf: _bytes)
-        
-        if(allbyt.count >= leng){
-            let msgd = Data(bytes: allbyt, count: leng)
-            
-            
-            addimg(data: msgd)
-        }
-    }
-    
-    
-    func addimg(data:Data)
-    {
-        
-        if(data.count>50)
-        {
-            
-            DispatchQueue.main.async {
-                
-                /// 添加图片
-                self.imgview = UIImageView(image: UIImage(data: data)!)
-                //                img.contentMode = .scaleAspectFit
-                self.view.addSubview(self.imgview!)
-                
-                
-                
-                
-                /// 保存的路径
-                //                let savePath = AvdioTool.shared.amrconvertBackWav
-                //
-                //
-                //                let dataAsNSData = data as NSData
-                //                dataAsNSData.write(toFile: savePath!, atomically: true)
-                
-                /// 接收回的数据转成wav
-                
-                //                AvdioTool.shared.playMp3()
-                
-                /// 计数器归零操作，反之上次存储的数据对下一次接收的数据进行干扰
-                self.leng = 0
-                
-                self.resetData = 0
-                
-                //                self.allbyt = [Byte]()
-            }
-        }
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.imgview?.removeFromSuperview()
-    }
 }
 
 

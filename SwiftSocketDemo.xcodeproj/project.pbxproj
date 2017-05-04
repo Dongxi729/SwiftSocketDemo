@@ -80,7 +80,6 @@
 		26EBDDFF1EBAF49200137E42 /* aaaa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aaaa.png; sourceTree = "<group>"; };
 		26EBDE011EBAFCA900137E42 /* bbbb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bbbb.png; sourceTree = "<group>"; };
 		26EBDE031EBAFF9D00137E42 /* cccc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cccc.png; sourceTree = "<group>"; };
-		26EBDE051EBB11D700137E42 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		26F41BF71EB0B70E00F4A929 /* SwiftSocketDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftSocketDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		26F41BF91EB0B70F00F4A929 /* amrFileCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amrFileCodec.h; sourceTree = "<group>"; };
 		26F41BFA1EB0B70F00F4A929 /* amrFileCodec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = amrFileCodec.mm; sourceTree = "<group>"; };
@@ -121,7 +120,6 @@
 		26800E651EA8B9920048D8A7 = {
 			isa = PBXGroup;
 			children = (
-				26EBDE051EBB11D700137E42 /* MyPlayground.playground */,
 				26800E981EA8BC960048D8A7 /* SwiftSocket.framework */,
 				26800E701EA8B9920048D8A7 /* SwiftSocketDemo */,
 				26800E851EA8B9920048D8A7 /* SwiftSocketDemoTests */,
