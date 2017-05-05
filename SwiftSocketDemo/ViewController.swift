@@ -171,7 +171,7 @@ class ViewController: UIViewController {
                 
                 if let msg = readmsg(clientSercer: client) {
                     DispatchQueue.main.async {
-
+                        
                     }
                 } else {
                     print("\((#file as NSString).lastPathComponent):(\(#line))\n","连接失败")
@@ -245,7 +245,8 @@ class ViewController: UIViewController {
                 /// 获取包头长度
                 convertData.getBytes(&leng, length: convertData.length)
                 
-                leng = leng + 8
+                /// 增加8个长度
+                leng = leng + 1
                 
                 print("leng :",leng)
                 bodyfun()
@@ -301,10 +302,8 @@ class ViewController: UIViewController {
         {
             //不能解析
         }
-
+        
     }
-    
-    
     
     
     
@@ -317,35 +316,51 @@ class ViewController: UIViewController {
         
         print(_over)
         
-        /// 添加类型后总长度增加了8，要减去8
-        for i in 0..<8 {
+        /// 添加类型后总长度增加了1，要减去1
+        for i in 0..<1 {
             
             allbyt.remove(at: 0)
             
-            
             /// 剪完8次后为我们要得到的真正数据
-            if i == 7 {
+            if i == 0 {
                 
                 print("水水水水",allbyt)
                 
                 DispatchQueue.main.async {
                     
-                    let ddd = UIImageView.init(frame: CGRect.init(x: 0, y: self.index, width: 100, height: 100))
+                    /// 图片
+//                    let ddd = UIImageView.init(frame: CGRect.init(x: 0, y: self.index, width: 100, height: 100))
+//                    
+//                    ddd.backgroundColor = UIColor.blue
+//                    
+//                    let imfDara = NSData.init(bytes: self.allbyt, length: self.allbyt.count)
+//                    
+//                    ddd.image = UIImage.init(data: imfDara as Data)
+//                    
+//                    self.view.addSubview(ddd)
+//                    
+//                    self.index += 100
                     
-                    ddd.backgroundColor = UIColor.blue
+                    /// 文字
+//                                        let imfDara = NSData.init(bytes: self.allbyt, length: self.allbyt.count)
+//                    
+//                                        let sss = String.init(data: imfDara as Data, encoding: .utf8)
+//                                        print("字符串",sss as Any)
+                    
+                    /// 语音
                     
                     let imfDara = NSData.init(bytes: self.allbyt, length: self.allbyt.count)
+
+                    let savePath = AvdioTool.shared.amrconvertBackWav
                     
-                    ddd.image = UIImage.init(data: imfDara as Data)
                     
-                    self.view.addSubview(ddd)
+                    let dataAsNSData = imfDara
+                    dataAsNSData.write(toFile: savePath!, atomically: true)
                     
-                    self.index += 100
-                    //            let imfDara = NSData.init(bytes: _over, length: _over.count)
-                    //
-                    //            let sss = String.init(data: imfDara as Data, encoding: .utf8)
-                    //            
-                    //            print("字符串",sss as Any)
+                    
+                    AvdioTool.shared.playMp3()
+                    
+                    
                 }
             }
         }
@@ -356,7 +371,7 @@ class ViewController: UIViewController {
     
     var sendStr : String?
     
-    var sendDataStr : Data?
+    
     
 }
 
@@ -365,128 +380,126 @@ extension ViewController {
     func sendMsg(sender : UIButton) -> Void {
         /// initData
         leng = 0
-        self.sendMessage(msgtosend:sendTfMsg.text!, clientServer: client)
+        self.sendMessage(clientServer: client)
         
     }
     
-    //发送消息
-    func sendMessage(msgtosend:String,clientServer : TCPClient?) {
+    /// 发送语音
+    private func sendVoice(server : TCPClient?) -> Void {
+        if var voiceData = AvdioTool.shared.voiceData {
+            
+            /// 发送文字
+            let datacc : NSMutableData = NSMutableData()
+            
+            var it1  = voiceData.count;
+            
+            /// 添加发送的文字
+            datacc.append(&it1, length: 4)
+            
+            datacc.append(voiceData)
+            
+            /// 转语音
+            var sendData : Data = datacc as Data
+            
+            sendData.insert(3, at: 4)
+            
+            guard let socket = server else {
+                return
+            }
+            
+            socket.send(data: sendData)
+        }
+    }
+    
+    /// 发送文字
+    private func sendTextFunc(server : TCPClient?) -> Void {
+        
+        /// 发送文字
+        let datacc : NSMutableData = NSMutableData()
+        
+        let stta = "asdfjlksdfjkhsfjk232782ywriusdfgjbsdf"
+        let d1 = stta.data(using: String.Encoding.utf8)
+        var it1  = d1?.count;
+        
+        /// 添加发送的文字
+        datacc.append(&it1, length: 4)
+        
+        /// 添加发送的类型
+        datacc.append(d1!)
+        
+        /// 转Data
+        var sendData : Data = datacc as Data
         
         
-        ///
-        // let imgdata = msgtosend.data(using: .utf8)
+        sendData.insert(10, at: 4)
         
-//        print("\((#file as NSString).lastPathComponent):(\(#line))\n")
-//        
-//        /// 数据解析
+        guard let socket = server else {
+            return
+        }
+
+        
+        socket.send(data: sendData)
+        
+    }
+    
+    
+    
+    /// 发送图片
+    private func sendImg(server : TCPClient?) -> Void {
+        /// 数据解析
         let img = UIImage.init(named: "cccc")
         let imgdata = UIImagePNGRepresentation(img!)
         
         
-//
-//        
-//        
-//        sendStr = "aaa,bbb,cccaaa,bbb"
-//        
-//        
-//        
-//        sendDataStr = sendStr?.data(using: String.Encoding.utf8)
-//        
-//        let datacc : NSMutableData = NSMutableData()
-//        
-//        let stta = "1asdfjlksdfjkhsfjk232782ywriusdfgjbsdf"
-//        let d1 = stta.data(using: String.Encoding.utf8)
-//        var it1  = d1?.count;
-//        
-//        /// 类型
-//        var myInt = 2
-//        var myIntData = Data(bytes: &myInt,
-//                             count: MemoryLayout.size(ofValue: myInt))
-////        datacc.append(&myIntData, length: 1)
-//        datacc.append(&it1, length: 4)
-//        datacc.append(d1!)
-//        
-//        
-//        
-//        let stta1 = "bsdfkljsdfk238792uyfkhdfkjsdnf"
-//        let d2 = stta1.data(using: String.Encoding.utf8)
-//        var it2  = d2?.count;
-//        
-//        ///// 6  99
-//        
-//        datacc.append(&it2, length: 4)
-//        
-//        datacc.append(d2!)
-//
-//        
-//        let stta2 = "cslkdfhjksdhfjk238ydhfjksdnbfmsdbmsdnf,smdfjsdkjghiuy342iuhfjkwebfjkwehfuiw2y32893uyhrkjwfjksdkjf"
-//        let d3 = stta2.data(using: String.Encoding.utf8)
-//        var it3  = d3?.count;
-//        datacc.append(&it3, length: 4)
-//        datacc.append(d3!)
-//        
-//        
-//        guard let socket = clientServer else {
-//            return
-//        }
-//        
-//        socket.send(data: datacc as Data)
-
         
-        
-        
-        if clientServer != nil {
+        if let sendData = imgdata {
+            var int : Int = sendData.count
             
-            if let sendData = imgdata {
-                var int : Int = sendData.count
+            print("\((#file as NSString).lastPathComponent):(\(#line))\n","发送包的大小为:" + String(int))
+            
+            let data2 : NSMutableData = NSMutableData()
+            
+
+//            /// 告诉发送的数据的长度
+            data2.append(&int, length: 4)
+            data2.append(sendData)
+            
+            var sendData : Data = data2 as Data
+            
+            sendData.insert(1, at: 4)
+            
+            
+            guard let socket = server else {
+                return
+            }
+            
+            if data2.length > 0 {
                 
-                print("\((#file as NSString).lastPathComponent):(\(#line))\n","发送包的大小为:" + String(int))
-                
-                let data2 : NSMutableData = NSMutableData()
-                
-                
-                /// 类型
-                var myInt = 8
-                var myIntData = Data(bytes: &myInt,
-                                     count: MemoryLayout.size(ofValue: myInt))
-                /// 告诉发送的数据的长度
-                data2.append(&int, length: 4)
-                
-                /// 告诉发送的类型的长度
-                data2.append(&myIntData.count,length :0)
-                
-                print("\((#file as NSString).lastPathComponent):(\(#line))\n",myIntData.count)
-                
-                data2.append(myIntData)
-                
-                data2.append(sendData)
-                
-                
-                
-                guard let socket = clientServer else {
-                    return
-                }
-                
-                if data2.length > 0 {
+                switch socket.send(data: sendData) {
                     
-                    switch socket.send(data: data2 as Data) {
-                        
-                        
-                    case .success:
-                        print("\((#file as NSString).lastPathComponent):(\(#line))\n","发送成功")
-                    case .failure( _):
-                        
-                        print("\((#file as NSString).lastPathComponent):(\(#line))\n","断开连接")
-                    }
-                } else {
-                    print("\((#file as NSString).lastPathComponent):(\(#line))\n","语音信息为空")
+                    
+                case .success:
+                    print("\((#file as NSString).lastPathComponent):(\(#line))\n","发送成功")
+                case .failure( _):
+                    
+                    print("\((#file as NSString).lastPathComponent):(\(#line))\n","断开连接")
                 }
-                
-                
             } else {
                 print("\((#file as NSString).lastPathComponent):(\(#line))\n","语音信息为空")
             }
+            
         }
+        
+
+    }
+    
+    //发送消息
+    func sendMessage(clientServer : TCPClient?) {
+//        sendImg(server: clientServer)
+        
+//        sendTextFunc(server: clientServer)
+        
+        sendVoice(server: clientServer)
     }
     
 }
