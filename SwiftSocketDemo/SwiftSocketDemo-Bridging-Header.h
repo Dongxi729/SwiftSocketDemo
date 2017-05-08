@@ -5,3 +5,7 @@
 #import "VoiceConverter.h"
 
 #import "WavConvert.h"
+
+
+#import "DDXML.h"
+#import "DDXMLElementAdditions.h"

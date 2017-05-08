@@ -13,7 +13,7 @@
 		26150CB41EAF213600F2B5BF /* wqwe.png in Resources */ = {isa = PBXBuildFile; fileRef = 26150CB31EAF213600F2B5BF /* wqwe.png */; };
 		26150CB61EAF221900F2B5BF /* zdx.png in Resources */ = {isa = PBXBuildFile; fileRef = 26150CB51EAF221900F2B5BF /* zdx.png */; };
 		26150CB81EAF24EC00F2B5BF /* test.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 26150CB71EAF24EC00F2B5BF /* test.mp3 */; };
-		2657FDC01EBA02F700B92648 /* SendAndReNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2657FDBF1EBA02F700B92648 /* SendAndReNew.swift */; };
+		266EC1FE1EBC49FD00AEA31C /* SendMediaTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266EC1FD1EBC49FD00AEA31C /* SendMediaTool.swift */; };
 		26800E721EA8B9920048D8A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26800E711EA8B9920048D8A7 /* AppDelegate.swift */; };
 		26800E741EA8B9920048D8A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26800E731EA8B9920048D8A7 /* ViewController.swift */; };
 		26800E771EA8B9920048D8A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26800E751EA8B9920048D8A7 /* Main.storyboard */; };
@@ -22,6 +22,18 @@
 		26800E871EA8B9920048D8A7 /* SwiftSocketDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26800E861EA8B9920048D8A7 /* SwiftSocketDemoTests.swift */; };
 		26800E991EA8BC960048D8A7 /* SwiftSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26800E981EA8BC960048D8A7 /* SwiftSocket.framework */; };
 		26800E9A1EA8BC960048D8A7 /* SwiftSocket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26800E981EA8BC960048D8A7 /* SwiftSocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		26A487341EC03BD200E9A091 /* ServerSendMsg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A487331EC03BD200E9A091 /* ServerSendMsg.swift */; };
+		26A4875C1EC0425000E9A091 /* DDXMLElementAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A4874D1EC0425000E9A091 /* DDXMLElementAdditions.m */; };
+		26A4875D1EC0425000E9A091 /* NSString+DDXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A487501EC0425000E9A091 /* NSString+DDXML.m */; };
+		26A4875E1EC0425000E9A091 /* DDXML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A487521EC0425000E9A091 /* DDXML.swift */; };
+		26A4875F1EC0425000E9A091 /* DDXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A487541EC0425000E9A091 /* DDXMLDocument.m */; };
+		26A487601EC0425000E9A091 /* DDXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A487561EC0425000E9A091 /* DDXMLElement.m */; };
+		26A487611EC0425000E9A091 /* DDXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A487581EC0425000E9A091 /* DDXMLNode.m */; };
+		26A487641EC0433E00E9A091 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A487631EC0433E00E9A091 /* libxml2.2.tbd */; };
+		26A4876D1EC0449E00E9A091 /* TextXMLAnalyser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A4876C1EC0449E00E9A091 /* TextXMLAnalyser.swift */; };
+		26A4876F1EC044BE00E9A091 /* test.xml in Resources */ = {isa = PBXBuildFile; fileRef = 26A4876E1EC044BE00E9A091 /* test.xml */; };
+		26A487721EC05AA900E9A091 /* SyncTimerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A487711EC05AA900E9A091 /* SyncTimerVC.swift */; };
+		26A487741EC05DF700E9A091 /* CountDownBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A487731EC05DF700E9A091 /* CountDownBtn.swift */; };
 		26EBDE001EBAF49200137E42 /* aaaa.png in Resources */ = {isa = PBXBuildFile; fileRef = 26EBDDFF1EBAF49200137E42 /* aaaa.png */; };
 		26EBDE021EBAFCA900137E42 /* bbbb.png in Resources */ = {isa = PBXBuildFile; fileRef = 26EBDE011EBAFCA900137E42 /* bbbb.png */; };
 		26EBDE041EBAFF9D00137E42 /* cccc.png in Resources */ = {isa = PBXBuildFile; fileRef = 26EBDE031EBAFF9D00137E42 /* cccc.png */; };
@@ -64,7 +76,7 @@
 		26150CB31EAF213600F2B5BF /* wqwe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wqwe.png; sourceTree = "<group>"; };
 		26150CB51EAF221900F2B5BF /* zdx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zdx.png; sourceTree = "<group>"; };
 		26150CB71EAF24EC00F2B5BF /* test.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = test.mp3; sourceTree = "<group>"; };
-		2657FDBF1EBA02F700B92648 /* SendAndReNew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendAndReNew.swift; sourceTree = "<group>"; };
+		266EC1FD1EBC49FD00AEA31C /* SendMediaTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendMediaTool.swift; sourceTree = "<group>"; };
 		26800E6E1EA8B9920048D8A7 /* SwiftSocketDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftSocketDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26800E711EA8B9920048D8A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		26800E731EA8B9920048D8A7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -76,7 +88,26 @@
 		26800E861EA8B9920048D8A7 /* SwiftSocketDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftSocketDemoTests.swift; sourceTree = "<group>"; };
 		26800E881EA8B9920048D8A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		26800E981EA8BC960048D8A7 /* SwiftSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftSocket.framework; sourceTree = "<group>"; };
-		26EBDDFE1EBAD28200137E42 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
+		26A487331EC03BD200E9A091 /* ServerSendMsg.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerSendMsg.swift; sourceTree = "<group>"; };
+		26A4874C1EC0425000E9A091 /* DDXMLElementAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLElementAdditions.h; sourceTree = "<group>"; };
+		26A4874D1EC0425000E9A091 /* DDXMLElementAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLElementAdditions.m; sourceTree = "<group>"; };
+		26A4874F1EC0425000E9A091 /* NSString+DDXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DDXML.h"; sourceTree = "<group>"; };
+		26A487501EC0425000E9A091 /* NSString+DDXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DDXML.m"; sourceTree = "<group>"; };
+		26A487511EC0425000E9A091 /* DDXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXML.h; sourceTree = "<group>"; };
+		26A487521EC0425000E9A091 /* DDXML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDXML.swift; sourceTree = "<group>"; };
+		26A487531EC0425000E9A091 /* DDXMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLDocument.h; sourceTree = "<group>"; };
+		26A487541EC0425000E9A091 /* DDXMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLDocument.m; sourceTree = "<group>"; };
+		26A487551EC0425000E9A091 /* DDXMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLElement.h; sourceTree = "<group>"; };
+		26A487561EC0425000E9A091 /* DDXMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLElement.m; sourceTree = "<group>"; };
+		26A487571EC0425000E9A091 /* DDXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLNode.h; sourceTree = "<group>"; };
+		26A487581EC0425000E9A091 /* DDXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLNode.m; sourceTree = "<group>"; };
+		26A487591EC0425000E9A091 /* KissXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KissXML.h; sourceTree = "<group>"; };
+		26A4875B1EC0425000E9A091 /* DDXMLPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLPrivate.h; sourceTree = "<group>"; };
+		26A487631EC0433E00E9A091 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
+		26A4876C1EC0449E00E9A091 /* TextXMLAnalyser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextXMLAnalyser.swift; sourceTree = "<group>"; };
+		26A4876E1EC044BE00E9A091 /* test.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = test.xml; sourceTree = "<group>"; };
+		26A487711EC05AA900E9A091 /* SyncTimerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncTimerVC.swift; sourceTree = "<group>"; };
+		26A487731EC05DF700E9A091 /* CountDownBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountDownBtn.swift; sourceTree = "<group>"; };
 		26EBDDFF1EBAF49200137E42 /* aaaa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aaaa.png; sourceTree = "<group>"; };
 		26EBDE011EBAFCA900137E42 /* bbbb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bbbb.png; sourceTree = "<group>"; };
 		26EBDE031EBAFF9D00137E42 /* cccc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cccc.png; sourceTree = "<group>"; };
@@ -101,6 +132,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26A487641EC0433E00E9A091 /* libxml2.2.tbd in Frameworks */,
 				26800E991EA8BC960048D8A7 /* SwiftSocket.framework in Frameworks */,
 				26F41C081EB0B70F00F4A929 /* libopencore-amrwb.a in Frameworks */,
 				26F41C071EB0B70F00F4A929 /* libopencore-amrnb.a in Frameworks */,
@@ -120,10 +152,13 @@
 		26800E651EA8B9920048D8A7 = {
 			isa = PBXGroup;
 			children = (
+				26A4876E1EC044BE00E9A091 /* test.xml */,
+				266EC1FD1EBC49FD00AEA31C /* SendMediaTool.swift */,
 				26800E981EA8BC960048D8A7 /* SwiftSocket.framework */,
 				26800E701EA8B9920048D8A7 /* SwiftSocketDemo */,
 				26800E851EA8B9920048D8A7 /* SwiftSocketDemoTests */,
 				26800E6F1EA8B9920048D8A7 /* Products */,
+				26A487621EC0433E00E9A091 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -139,13 +174,17 @@
 		26800E701EA8B9920048D8A7 /* SwiftSocketDemo */ = {
 			isa = PBXGroup;
 			children = (
+				26A4874A1EC0425000E9A091 /* KissXML */,
 				26F41BF61EB0B6E900F4A929 /* voiceConvert */,
 				26150CB11EAEE75E00F2B5BF /* DispatchQueue-Extension.swift */,
+				26F41BF71EB0B70E00F4A929 /* SwiftSocketDemo-Bridging-Header.h */,
 				26F41C0D1EB0B76400F4A929 /* AvdioTool.swift */,
+				26A487701EC05A6900E9A091 /* xmlDataDemo */,
 				26800E711EA8B9920048D8A7 /* AppDelegate.swift */,
+				26A487711EC05AA900E9A091 /* SyncTimerVC.swift */,
 				26800E731EA8B9920048D8A7 /* ViewController.swift */,
-				2657FDBF1EBA02F700B92648 /* SendAndReNew.swift */,
-				26EBDDFE1EBAD28200137E42 /* MyPlayground.playground */,
+				26A487731EC05DF700E9A091 /* CountDownBtn.swift */,
+				26A487331EC03BD200E9A091 /* ServerSendMsg.swift */,
 				26150CB51EAF221900F2B5BF /* zdx.png */,
 				26EBDE011EBAFCA900137E42 /* bbbb.png */,
 				26EBDDFF1EBAF49200137E42 /* aaaa.png */,
@@ -171,6 +210,67 @@
 			path = SwiftSocketDemoTests;
 			sourceTree = "<group>";
 		};
+		26A4874A1EC0425000E9A091 /* KissXML */ = {
+			isa = PBXGroup;
+			children = (
+				26A4874B1EC0425000E9A091 /* Additions */,
+				26A4874E1EC0425000E9A091 /* Categories */,
+				26A487511EC0425000E9A091 /* DDXML.h */,
+				26A487521EC0425000E9A091 /* DDXML.swift */,
+				26A487531EC0425000E9A091 /* DDXMLDocument.h */,
+				26A487541EC0425000E9A091 /* DDXMLDocument.m */,
+				26A487551EC0425000E9A091 /* DDXMLElement.h */,
+				26A487561EC0425000E9A091 /* DDXMLElement.m */,
+				26A487571EC0425000E9A091 /* DDXMLNode.h */,
+				26A487581EC0425000E9A091 /* DDXMLNode.m */,
+				26A487591EC0425000E9A091 /* KissXML.h */,
+				26A4875A1EC0425000E9A091 /* Private */,
+			);
+			path = KissXML;
+			sourceTree = "<group>";
+		};
+		26A4874B1EC0425000E9A091 /* Additions */ = {
+			isa = PBXGroup;
+			children = (
+				26A4874C1EC0425000E9A091 /* DDXMLElementAdditions.h */,
+				26A4874D1EC0425000E9A091 /* DDXMLElementAdditions.m */,
+			);
+			path = Additions;
+			sourceTree = "<group>";
+		};
+		26A4874E1EC0425000E9A091 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				26A4874F1EC0425000E9A091 /* NSString+DDXML.h */,
+				26A487501EC0425000E9A091 /* NSString+DDXML.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		26A4875A1EC0425000E9A091 /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				26A4875B1EC0425000E9A091 /* DDXMLPrivate.h */,
+			);
+			path = Private;
+			sourceTree = "<group>";
+		};
+		26A487621EC0433E00E9A091 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				26A487631EC0433E00E9A091 /* libxml2.2.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		26A487701EC05A6900E9A091 /* xmlDataDemo */ = {
+			isa = PBXGroup;
+			children = (
+				26A4876C1EC0449E00E9A091 /* TextXMLAnalyser.swift */,
+			);
+			name = xmlDataDemo;
+			sourceTree = "<group>";
+		};
 		26F41BF61EB0B6E900F4A929 /* voiceConvert */ = {
 			isa = PBXGroup;
 			children = (
@@ -180,7 +280,6 @@
 				26F41C011EB0B70F00F4A929 /* opencore-amrwb */,
 				26F41C041EB0B70F00F4A929 /* VoiceConverter.h */,
 				26F41C051EB0B70F00F4A929 /* VoiceConverter.mm */,
-				26F41BF71EB0B70E00F4A929 /* SwiftSocketDemo-Bridging-Header.h */,
 				26F41C0A1EB0B73000F4A929 /* WavConvert.h */,
 				26F41C0B1EB0B73000F4A929 /* WavConvert.m */,
 			);
@@ -313,6 +412,7 @@
 				26150CB01EAE29B500F2B5BF /* thumb.png in Resources */,
 				26EBDE021EBAFCA900137E42 /* bbbb.png in Resources */,
 				26800E7C1EA8B9920048D8A7 /* LaunchScreen.storyboard in Resources */,
+				26A4876F1EC044BE00E9A091 /* test.xml in Resources */,
 				26EBDE001EBAF49200137E42 /* aaaa.png in Resources */,
 				26800E791EA8B9920048D8A7 /* Assets.xcassets in Resources */,
 				26150CAE1EAE1E1F00F2B5BF /* ooo.png in Resources */,
@@ -338,12 +438,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26A487341EC03BD200E9A091 /* ServerSendMsg.swift in Sources */,
+				26A487721EC05AA900E9A091 /* SyncTimerVC.swift in Sources */,
 				26F41C091EB0B70F00F4A929 /* VoiceConverter.mm in Sources */,
 				26F41C0E1EB0B76400F4A929 /* AvdioTool.swift in Sources */,
+				26A487741EC05DF700E9A091 /* CountDownBtn.swift in Sources */,
+				26A4875D1EC0425000E9A091 /* NSString+DDXML.m in Sources */,
+				26A4875F1EC0425000E9A091 /* DDXMLDocument.m in Sources */,
+				26A487611EC0425000E9A091 /* DDXMLNode.m in Sources */,
+				26A4875E1EC0425000E9A091 /* DDXML.swift in Sources */,
 				26800E741EA8B9920048D8A7 /* ViewController.swift in Sources */,
-				2657FDC01EBA02F700B92648 /* SendAndReNew.swift in Sources */,
+				26A487601EC0425000E9A091 /* DDXMLElement.m in Sources */,
 				26F41C061EB0B70F00F4A929 /* amrFileCodec.mm in Sources */,
+				26A4876D1EC0449E00E9A091 /* TextXMLAnalyser.swift in Sources */,
 				26800E721EA8B9920048D8A7 /* AppDelegate.swift in Sources */,
+				26A4875C1EC0425000E9A091 /* DDXMLElementAdditions.m in Sources */,
+				266EC1FE1EBC49FD00AEA31C /* SendMediaTool.swift in Sources */,
 				26F41C0C1EB0B73000F4A929 /* WavConvert.m in Sources */,
 				26150CB21EAEE75E00F2B5BF /* DispatchQueue-Extension.swift in Sources */,
 			);
@@ -493,6 +603,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				HEADER_SEARCH_PATHS = "${SDK_DIR}/usr/include/libxml2";
 				INFOPLIST_FILE = SwiftSocketDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -518,6 +629,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				HEADER_SEARCH_PATHS = "${SDK_DIR}/usr/include/libxml2";
 				INFOPLIST_FILE = SwiftSocketDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
