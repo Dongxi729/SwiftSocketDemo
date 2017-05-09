@@ -211,6 +211,31 @@ class SendMediaTool: NSObject {
         }
     }
     
+    func sendHart() -> Void {
+        print("心跳包线程")
+        
+        /// 发送文字
+        let datacc : NSMutableData = NSMutableData()
+        
+        
+        /// 转语音
+        var sendData : Data = datacc as Data
+        
+        
+        guard let socket = client else {
+            
+            return
+        }
+        
+        /// 模拟类型为3
+        sendData.insert(6, at: 0)
+        
+        print("\((#file as NSString).lastPathComponent):(\(#line))\n",sendData)
+        
+        socket.send(data: sendData)
+
+    }
+    
     /// 发送文字
     func sendTextFunc(sendText : String) -> Void {
         

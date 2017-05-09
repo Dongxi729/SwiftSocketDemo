@@ -22,8 +22,7 @@ class ViewController: UIViewController {
     
     var imgview : UIImageView?
     
-    /// 按钮是否显示
-    var isbtnShow : Bool = false
+
     
     
     lazy var kllll: UILabel = {
@@ -31,19 +30,6 @@ class ViewController: UIViewController {
         d.text = "asdsa"
         return d
     }()
-    
-    
-    var timerSec : Int = 0 {
-        didSet {
-            print("dddd")
-            
-            DispatchQueue.main.async {
-                self.ll.text = "hhahh"
-                
-                self.view.addSubview(self.kllll)
-            }
-        }
-    }
     
     func getTimerCall(sss : Int) -> Void {
         print("asdsadsadsadsadsadsad",sss)
@@ -61,9 +47,7 @@ class ViewController: UIViewController {
         
         yzmBtn.titleLabel?.font = UIFont.systemFont(ofSize: 13)
         
-        yzmBtn.isHidden = true
-        
-        yzmBtn.initwith(color: UIColor.red, title: "倒是机会", superView: self.view, descc: self.timerSec)
+        yzmBtn.initwith(color: UIColor.red, title: "倒是机会", superView: self.view, descc: xxxx.shared.vv)
         return yzmBtn
     }()
     
@@ -122,15 +106,7 @@ class ViewController: UIViewController {
             /// 接收通知、获取传来的值
             NotificationCenter.default.addObserver(self, selector: #selector(self.showDataToController(sender:)), name: NSNotification.Name(rawValue: "receiveData"), object: nil)
         }
-        
-        
-        AvdioTool.shared.creatSession()
-        
-        /// 开启链接服务器
-        DispatchQueue.global(qos: .default).async {
-            
-            SendMediaTool.shared.testServer()
-        }
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -139,7 +115,7 @@ class ViewController: UIViewController {
         if xxxx.shared.vv != 0 {
             
             print("\((#file as NSString).lastPathComponent):(\(#line))\n")
-            self.view.addSubview(ll)
+            self.view.addSubview(yzmBtn)
         }
     }
     

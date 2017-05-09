@@ -34,6 +34,7 @@
 		26A4876F1EC044BE00E9A091 /* test.xml in Resources */ = {isa = PBXBuildFile; fileRef = 26A4876E1EC044BE00E9A091 /* test.xml */; };
 		26A487721EC05AA900E9A091 /* SyncTimerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A487711EC05AA900E9A091 /* SyncTimerVC.swift */; };
 		26A487741EC05DF700E9A091 /* CountDownBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A487731EC05DF700E9A091 /* CountDownBtn.swift */; };
+		26EB72E51EC15F8D00C3CBE0 /* TImerTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EB72E41EC15F8D00C3CBE0 /* TImerTool.swift */; };
 		26EBDE001EBAF49200137E42 /* aaaa.png in Resources */ = {isa = PBXBuildFile; fileRef = 26EBDDFF1EBAF49200137E42 /* aaaa.png */; };
 		26EBDE021EBAFCA900137E42 /* bbbb.png in Resources */ = {isa = PBXBuildFile; fileRef = 26EBDE011EBAFCA900137E42 /* bbbb.png */; };
 		26EBDE041EBAFF9D00137E42 /* cccc.png in Resources */ = {isa = PBXBuildFile; fileRef = 26EBDE031EBAFF9D00137E42 /* cccc.png */; };
@@ -108,6 +109,7 @@
 		26A4876E1EC044BE00E9A091 /* test.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = test.xml; sourceTree = "<group>"; };
 		26A487711EC05AA900E9A091 /* SyncTimerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncTimerVC.swift; sourceTree = "<group>"; };
 		26A487731EC05DF700E9A091 /* CountDownBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountDownBtn.swift; sourceTree = "<group>"; };
+		26EB72E41EC15F8D00C3CBE0 /* TImerTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TImerTool.swift; sourceTree = "<group>"; };
 		26EBDDFF1EBAF49200137E42 /* aaaa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aaaa.png; sourceTree = "<group>"; };
 		26EBDE011EBAFCA900137E42 /* bbbb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bbbb.png; sourceTree = "<group>"; };
 		26EBDE031EBAFF9D00137E42 /* cccc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cccc.png; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 		26800E651EA8B9920048D8A7 = {
 			isa = PBXGroup;
 			children = (
+				26EB72E41EC15F8D00C3CBE0 /* TImerTool.swift */,
 				26A4876E1EC044BE00E9A091 /* test.xml */,
 				266EC1FD1EBC49FD00AEA31C /* SendMediaTool.swift */,
 				26800E981EA8BC960048D8A7 /* SwiftSocket.framework */,
@@ -444,6 +447,7 @@
 				26F41C0E1EB0B76400F4A929 /* AvdioTool.swift in Sources */,
 				26A487741EC05DF700E9A091 /* CountDownBtn.swift in Sources */,
 				26A4875D1EC0425000E9A091 /* NSString+DDXML.m in Sources */,
+				26EB72E51EC15F8D00C3CBE0 /* TImerTool.swift in Sources */,
 				26A4875F1EC0425000E9A091 /* DDXMLDocument.m in Sources */,
 				26A487611EC0425000E9A091 /* DDXMLNode.m in Sources */,
 				26A4875E1EC0425000E9A091 /* DDXML.swift in Sources */,

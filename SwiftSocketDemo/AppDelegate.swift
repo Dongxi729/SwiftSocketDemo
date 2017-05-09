@@ -24,9 +24,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window?.backgroundColor = UIColor.white
         
+        createSocket()
         
+        createHeart()
         
         return true
+    }
+    
+    /// 心跳包
+    func createHeart() -> Void {
+        TImerTool.shared.timerCount(seconds: 5)
+    }
+    
+    
+    /// 创建通信
+    func createSocket() -> Void {
+        
+        
+        AvdioTool.shared.creatSession()
+        
+        /// 开启链接服务器
+        DispatchQueue.global(qos: .default).async {
+            
+            SendMediaTool.shared.testServer()
+        }
     }
 }
 

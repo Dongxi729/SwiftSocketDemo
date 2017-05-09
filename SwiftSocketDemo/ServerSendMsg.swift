@@ -39,22 +39,27 @@ class ServerSendMsg: NSObject {
         print(xmlStr as Any)
         
         //构造XML文档
-        let doc = try! DDXMLDocument(data: xmlData!, options:0)
         
-        let users = try! doc.nodes(forXPath: "//R") as! [DDXMLElement]
         
-        for user in users {
+        do {
+            let doc =  try DDXMLDocument(data: xmlData!, options:0)
+            let users = try! doc.nodes(forXPath: "//R") as! [DDXMLElement]
             
-            /// 倒数计时
-            let countDownSec = user.attribute(forName: "f")?.stringValue
-            
-            self.coutSec = Int(countDownSec!)!
-            
-//            ViewController.shared.timerSec = Int(countDownSec!)!
-            
-            xxxx.shared.vv = Int(countDownSec!)!
+            for user in users {
+                
+                /// 倒数计时
+                let countDownSec = user.attribute(forName: "f")?.stringValue
+                
+                self.coutSec = Int(countDownSec!)!
+                
+                //            ViewController.shared.timerSec = Int(countDownSec!)!
+                
+                xxxx.shared.vv = Int(countDownSec!)!
+            }
+        } catch {
+            print("xml数据异常")
         }
-        
+
     }
 }
 
